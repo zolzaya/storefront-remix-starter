@@ -88,7 +88,7 @@ export function CartContents({
                       className="font-medium text-primary-600 hover:text-primary-500"
                       onClick={() => removeItem && removeItem(line.id)}
                     >
-                      Remove
+                      Хасах
                     </button>
                   )}
                 </div>

@@ -58,7 +58,7 @@ export function CartTray({
                   <div className="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                     <div className="flex items-start justify-between">
                       <Dialog.Title className="text-lg font-medium text-gray-900">
-                        Shopping cart
+                        Миний Сагс
                       </Dialog.Title>
                       <div className="ml-3 h-7 flex items-center">
                         <button
@@ -80,10 +80,10 @@ export function CartTray({
                           editable={editable}
                           removeItem={removeItem}
                           adjustOrderLine={adjustOrderLine}
-                        ></CartContents>
+                        />
                       ) : (
                         <div className="flex items-center justify-center h-48 text-xl text-gray-400">
-                          Your cart is empty
+                          Таны сагс хоосон байна.
                         </div>
                       )}
                     </div>
@@ -92,7 +92,7 @@ export function CartTray({
                   {activeOrder?.totalQuantity && editable && (
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p>Subtotal</p>
+                        <p>Нийт дүн</p>
                         <p>
                           {currencyCode && (
                             <Price
@@ -111,7 +111,7 @@ export function CartTray({
                           onClick={() => onClose(false)}
                           className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700"
                         >
-                          Checkout
+                          Худалдан авах
                         </Link>
                       </div>
                     </div>

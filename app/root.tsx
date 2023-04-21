@@ -12,7 +12,6 @@ import {
   useRouteError,
 } from '@remix-run/react';
 import styles from './styles/app.css';
-import { Header } from './components/header/Header';
 import {
   DataFunctionArgs,
   MetaFunction,
@@ -27,6 +26,7 @@ import { getActiveCustomer } from '~/providers/customer/customer';
 import Footer from '~/components/footer/Footer';
 import { useActiveOrder } from '~/utils/use-active-order';
 import { setApiUrl } from '~/graphqlWrapper';
+import { Header } from './components/header/Header';
 
 export const meta: MetaFunction = () => {
   return { title: APP_META_TITLE, description: APP_META_DESCRIPTION };

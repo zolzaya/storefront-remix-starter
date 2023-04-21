@@ -147,7 +147,7 @@ export default function CheckoutShipping() {
     <div>
       <div>
         <h2 className="text-lg font-medium text-gray-900">
-          Contact information
+          Захиалагчийн мэдээлэл
         </h2>
 
         {isSignedIn ? (
@@ -241,7 +241,7 @@ export default function CheckoutShipping() {
         <input type="hidden" name="action" value="setCheckoutShipping" />
         <div className="mt-10 border-t border-gray-200 pt-10">
           <h2 className="text-lg font-medium text-gray-900">
-            Shipping information
+            Хүргэлтийн хаяг
           </h2>
         </div>
         {isSignedIn && activeCustomer.addresses?.length ? (
@@ -282,7 +282,7 @@ export default function CheckoutShipping() {
         )}
       >
         <LockClosedIcon className="w-5 h-5"></LockClosedIcon>
-        <span>Proceed to payment</span>
+        <span>Үргэлжлүүлэх</span>
       </button>
     </div>
   );

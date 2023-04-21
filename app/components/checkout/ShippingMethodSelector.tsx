@@ -22,7 +22,7 @@ export function ShippingMethodSelector({
   return (
     <RadioGroup value={shippingMethodId} onChange={onChange}>
       <RadioGroup.Label className="text-lg font-medium text-gray-900">
-        Delivery method
+        Хүргэлтийн төрөл
       </RadioGroup.Label>
 
       <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">

@@ -6,9 +6,9 @@ import { classNames } from '~/utils/class-names';
 import { CartTotals } from '~/components/cart/CartTotals';
 
 const steps = [
-  { name: 'Shipping', state: 'shipping' },
-  { name: 'Payment', state: 'payment' },
-  { name: 'Confirmation', state: 'confirmation' },
+  { name: 'Хүргэлт', state: 'shipping' },
+  { name: 'Төлбөр', state: 'payment' },
+  { name: 'Баярлалаа', state: 'confirmation' },
 ];
 
 export default function Checkout() {
@@ -66,7 +66,7 @@ export default function Checkout() {
           {!isConfirmationPage && (
             <div className="mt-10 lg:mt-0">
               <h2 className="text-lg font-medium text-gray-900 mb-4">
-                Order summary
+                Захиалгын мэдээлэл
               </h2>
 
               <CartContents

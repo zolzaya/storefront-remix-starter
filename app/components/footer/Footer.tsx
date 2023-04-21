@@ -122,9 +122,9 @@ export default function Footer({
           </div>
         </div>
         <div className="mt-8 border-t pt-8">
-          <a
+          <Link
             className="flex items-center space-x-4 font-medium text-gray-500 hover:text-gray-700"
-            href="https://github.com/vendure-ecommerce/storefront-remix-starter"
+            to="/"
           >
             <svg
               fill="currentColor"
@@ -138,8 +138,8 @@ export default function Footer({
                 clipRule="evenodd"
               />
             </svg>
-            <span>github.com/vendure-ecommerce/storefront-remix-starter</span>
-          </a>
+            <span>superb.mn</span>
+          </Link>
         </div>
       </div>
     </footer>

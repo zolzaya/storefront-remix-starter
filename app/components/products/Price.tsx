@@ -1,4 +1,3 @@
-import { CurrencyCode } from '~/generated/graphql';
 import { ProductCardProps } from './ProductCard';
 
 export function Price({
@@ -12,25 +11,25 @@ export function Price({
     return <></>;
   }
   if (typeof priceWithTax === 'number') {
-    return <>{formatPrice(priceWithTax, currencyCode)}</>;
+    return <>{formatPrice(priceWithTax)}</>;
   }
   if ('value' in priceWithTax) {
-    return <>{formatPrice(priceWithTax.value, currencyCode)}</>;
+    return <>{formatPrice(priceWithTax.value)}</>;
   }
   if (priceWithTax.min === priceWithTax.max) {
-    return <>{formatPrice(priceWithTax.min, currencyCode)}</>;
+    return <>{formatPrice(priceWithTax.min)}</>;
   }
   return (
     <>
-      {formatPrice(priceWithTax.min, currencyCode)} -{' '}
-      {formatPrice(priceWithTax.max, currencyCode)}
+      {formatPrice(priceWithTax.min)} -{' '}
+      {formatPrice(priceWithTax.max)}
     </>
   );
 }
 
-export function formatPrice(value: number, currency: CurrencyCode) {
+export function formatPrice(amount: number) {
   return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency,
-  }).format(value / 100);
+    minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  }).format(amount) + ' ₮';
 }
