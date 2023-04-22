@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Link } from '@remix-run/react';
+import { Form, Link } from '@remix-run/react';
 import { Fragment } from 'react';
 import { classNames } from '~/utils/class-names';
 
@@ -78,19 +78,23 @@ export function CustomerMenus() {
               </Link>
             )}
           </Menu.Item>
+
           <Menu.Item>
             {({ active }) => (
-              <Link
-                to="/account/password"
-                className={classNames(
-                  active ? 'bg-gray-100' : '',
-                  'block px-4 py-2 text-sm text-gray-700',
-                )}
-              >
-                Гарах
-              </Link>
+              <Form method="post" action="/api/logout">
+                <button
+                  role="button"
+                  className={classNames(
+                    active ? 'bg-gray-100' : '',
+                    'block px-4 py-2 text-sm text-gray-700 w-full text-left',
+                  )}
+                >
+                  Гарах
+                </button>
+              </Form>
             )}
           </Menu.Item>
+
         </Menu.Items>
       </Transition>
     </Fragment>

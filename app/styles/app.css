@@ -1093,6 +1093,10 @@ button:disabled {
   height: 100%;
 }
 
+#app :is(.h-12) {
+  height: 3rem;
+}
+
 #app :is(.min-h-\[220px\]) {
   min-height: 220px;
 }
@@ -2033,6 +2037,10 @@ button:disabled {
   text-align: center;
 }
 
+#app :is(.text-right) {
+  text-align: right;
+}
+
 #app :is(.text-end) {
   text-align: end;
 }
@@ -2578,6 +2586,16 @@ button:disabled {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+#app :is(.hover\:text-primary-800:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity));
+}
+
+#app :is(.hover\:text-indigo-500:hover) {
+  --tw-text-opacity: 1;
+  color: rgb(99 102 241 / var(--tw-text-opacity));
+}
+
 #app :is(.hover\:opacity-50:hover) {
   opacity: 0.5;
 }
@@ -2603,6 +2621,11 @@ button:disabled {
 #app :is(.focus\:border-white:focus) {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
+#app :is(.focus\:border-indigo-500:focus) {
+  --tw-border-opacity: 1;
+  border-color: rgb(99 102 241 / var(--tw-border-opacity));
 }
 
 #app :is(.focus\:placeholder-gray-400:focus)::-moz-placeholder {
@@ -2645,6 +2668,11 @@ button:disabled {
 #app :is(.focus\:ring-white:focus) {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
+}
+
+#app :is(.focus\:ring-indigo-500:focus) {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));
 }
 
 #app :is(.focus\:ring-offset-0:focus) {

@@ -6,7 +6,7 @@ import { Select } from '~/components/Select';
 import OrderHistoryItem from '~/components/account/OrderHistoryItem';
 import { ALLOWED_PAGINATION_LIMITS } from '~/constants';
 
-import { loader, orderPaginationValidator } from "~/route-containers/account/history";
+import { loader, orderPaginationValidator } from "~/route-containers/account/orders.server";
 export { loader, orderPaginationValidator };
 
 
