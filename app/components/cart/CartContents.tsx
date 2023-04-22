@@ -49,7 +49,7 @@ export function CartContents({
                 {editable ? (
                   <Form>
                     <label htmlFor={`quantity-${line.id}`} className="mr-2">
-                      Quantity
+                      Тоо ширхэг
                     </label>
                     <select
                       disabled={!isEditable}

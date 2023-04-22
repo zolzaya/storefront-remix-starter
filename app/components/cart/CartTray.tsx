@@ -103,7 +103,7 @@ export function CartTray({
                         </p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
-                        Shipping will be calculated at checkout.
+                        Хүргэлтийг төлбөр төлөх үед бодно.
                       </p>
                       <div className="mt-6">
                         <Link

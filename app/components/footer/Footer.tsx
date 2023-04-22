@@ -3,10 +3,9 @@ import { Link } from '@remix-run/react';
 
 const navigation = {
   support: [
-    { name: 'Help', href: '#' },
-    { name: 'Track order', href: '#' },
-    { name: 'Shipping', href: '#' },
-    { name: 'Returns', href: '#' },
+    { name: 'Тусламж', href: '/help' },
+    { name: 'Захиалга шалгах', href: '/track-order' },
+    { name: 'Үйлчилгээний нөхцөл', href: '/tos' },
   ],
   company: [
     { name: 'About', href: '#' },
@@ -54,7 +53,7 @@ export default function Footer({
               </div>
               <div className="mt-12 md:mt-0">
                 <h3 className="text-sm font-semibold text-gray-500 tracking-wider uppercase">
-                  Support
+                  Тусламж
                 </h3>
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.support.map((item) => (
@@ -70,7 +69,7 @@ export default function Footer({
                 </ul>
               </div>
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
+            {/* <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm font-semibold text-gray-500 tracking-wider uppercase">
                   Company
@@ -88,18 +87,18 @@ export default function Footer({
                   ))}
                 </ul>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="mt-8 xl:mt-0">
             <h3 className="text-sm font-semibold text-gray-500 tracking-wider uppercase">
-              Subscribe to our newsletter
+              superb.mn имэйлд бүртгүүлэх
             </h3>
             <p className="mt-4 text-base text-gray-500">
               Be the first to know about exclusive offers & deals.
             </p>
             <form className="mt-4 sm:flex sm:max-w-md">
               <label htmlFor="email-address" className="sr-only">
-                Email address
+                Имэйл хаяг
               </label>
               <input
                 type="email"
@@ -108,14 +107,14 @@ export default function Footer({
                 autoComplete="email"
                 required
                 className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
-                placeholder="Enter your email"
+                placeholder="Имэйл хаягаа оруулна уу"
               />
               <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
                 <button
                   type="submit"
                   className="w-full bg-primary-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-primary-500"
                 >
-                  Subscribe
+                  Бүртгүүлэх
                 </button>
               </div>
             </form>

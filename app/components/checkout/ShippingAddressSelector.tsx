@@ -1,12 +1,9 @@
 import { RadioGroup } from '@headlessui/react';
-import { classNames } from '~/utils/class-names';
-import { Price } from '~/components/products/Price';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import {
-  ActiveCustomerAddressesQuery,
-  CurrencyCode,
-  EligibleShippingMethodsQuery,
+  ActiveCustomerAddressesQuery
 } from '~/generated/graphql';
+import { classNames } from '~/utils/class-names';
 
 export type SelectedAddress = NonNullable<
   NonNullable<ActiveCustomerAddressesQuery['activeCustomer']>['addresses']
@@ -44,18 +41,18 @@ export function ShippingAddressSelector({
                       as="span"
                       className="block text-sm font-medium text-gray-900"
                     >
-                      {address.streetLine1}, {address.postalCode}
+                      {address.fullName} - {address.phoneNumber}
                     </RadioGroup.Label>
                     <RadioGroup.Description
                       as="span"
                       className="mt-6 text-sm text-gray-800"
                     >
                       <ul>
-                        <li>{address.streetLine1}</li>
-                        <li>{address.streetLine2}</li>
-                        <li>{address.city}</li>
-                        <li>{address.province}</li>
-                        <li>{address.postalCode}</li>
+                        <li>{address.streetLine1},</li>
+                        {/* <li>{address.streetLine2}</li> */}
+                        {/* <li>{address.city}</li> */}
+                        {/* <li>{address.province}</li> */}
+                        {/* <li>{address.postalCode}</li> */}
                         <li>{address.country.name}</li>
                       </ul>
                     </RadioGroup.Description>

@@ -92,7 +92,7 @@ export default function EditAddress() {
   return (
     <div>
       <Modal isOpen={state} close={close} afterClose={afterClose}>
-        <Modal.Title>Edit address</Modal.Title>
+        <Modal.Title>Хаяг засах</Modal.Title>
         <Modal.Body>
           <CustomerAddressForm
             address={address as Address}
@@ -103,14 +103,14 @@ export default function EditAddress() {
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={close}>
-            Cancel
+            Цуцлах
           </Button>
           <HighlightedButton
             isSubmitting={navigation.state === 'submitting'}
             type="submit"
             onClick={submitForm}
           >
-            Save
+            Хадгалах
           </HighlightedButton>
         </Modal.Footer>
       </Modal>

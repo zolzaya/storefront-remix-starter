@@ -1753,6 +1753,11 @@ button:disabled {
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
+#app :is(.bg-primary-300) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(125 211 252 / var(--tw-bg-opacity));
+}
+
 #app :is(.bg-opacity-0) {
   --tw-bg-opacity: 0;
 }

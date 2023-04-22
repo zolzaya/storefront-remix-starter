@@ -8,15 +8,15 @@ import { Select } from '~/components/Select';
 
 export const validator = withZod(
   z.object({
-    fullName: z.string().min(1, { message: 'Name is required' }),
-    city: z.string(),
-    countryCode: z.string().min(1, { message: 'Country is required' }),
-    postalCode: z.string(),
-    province: z.string(),
-    streetLine1: z.string().min(1, { message: 'Address is required' }),
-    streetLine2: z.string(),
-    phone: z.string(),
-    company: z.string(),
+    fullName: z.string().min(1, { message: 'Нэр хоосон байна' }),
+    city: z.string().optional(),
+    countryCode: z.string().min(1, { message: 'Хот / Аймаг хоосон байна' }),
+    postalCode: z.string().optional(),
+    province: z.string().optional(),
+    streetLine1: z.string().min(1, { message: 'Хаяг хоосон байна' }),
+    streetLine2: z.string().optional(),
+    phone: z.string().min(1, { message: "Утасны дугаар хоосон байна" }),
+    company: z.string().optional(),
   }),
 );
 
@@ -52,27 +52,28 @@ export default function CustomerAddressForm({
     >
       <input type="hidden" name="intent" value="updateAddress" />
       <div className="grid grid-cols-1 gap-y-2 my-8">
-        <div className="grid grid-cols-2 gap-x-2">
-          <Input
-            label="Full name"
-            name="fullName"
-            required
-            autoComplete="full-name"
-          />
-        </div>
-        <Input label="Company" name="company" />
         <Input
-          label="Address"
+          label="Нэр"
+          name="fullName"
+          required
+          autoComplete="full-name"
+        />
+        <Input label="Компани" name="company" />
+        <Input label="Утасны дугаар" name="phone" autoComplete="phone" required />
+        <Input
+          label="Хаяг"
           name="streetLine1"
           required
           autoComplete="address-line1"
         />
-        <Input
+        {/* <Input
           label="Apartment, suite, etc."
           name="streetLine2"
           autoComplete="address-line2"
-        />
-        <div className="grid grid-cols-[144px_1fr] gap-x-2">
+        /> */}
+        {/* <input type="hidden" name="postalcode" value="210200" />
+        <input type="hidden" name="city" value="ub" /> */}
+        {/* <div className="grid grid-cols-[144px_1fr] gap-x-2">
           <Input
             label="Postal code"
             name="postalCode"
@@ -80,26 +81,25 @@ export default function CustomerAddressForm({
             autoComplete="postal-code"
           />
           <Input label="City" name="city" required autoComplete="locality" />
-        </div>
-        <Input
+        </div> */}
+        {/* <Input
           label="Province / State"
           name="province"
           autoComplete="address-level1"
-        />
+        /> */}
         <Select
           name="countryCode"
           autoComplete="country"
-          placeholder="Select a country..."
+          placeholder="-- Сонгох --"
           required
-          label="Country"
+          label="Хот / Аймаг"
         >
           {availableCountries?.map((country) => (
-            <option key={country.id} value={country.code}>
+            <option key={country.id} value={country.code} selected={country.code === "ulaanbaatar"}>
               {country.name}
             </option>
           ))}
         </Select>
-        <Input label="Phone" name="phone" autoComplete="phone" />
         <input type="submit" hidden />
       </div>
     </ValidatedForm>

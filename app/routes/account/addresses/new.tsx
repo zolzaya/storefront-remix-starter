@@ -81,23 +81,25 @@ export default function NewAddress() {
     <div>
       <Modal isOpen={state} close={close} afterClose={afterClose}>
         <Modal.Title>Хаяг нэмэх</Modal.Title>
+
         <Modal.Body>
           <CustomerAddressForm
             availableCountries={availableCountries}
             formRef={formRef}
             submit={submitForm}
-          ></CustomerAddressForm>
+          />
         </Modal.Body>
+
         <Modal.Footer>
           <Button type="button" onClick={close}>
-            Cancel
+            Цуцлах
           </Button>
           <HighlightedButton
             isSubmitting={navigation.state === 'submitting'}
             type="submit"
             onClick={submitForm}
           >
-            Save
+            Хадгалах
           </HighlightedButton>
         </Modal.Footer>
       </Modal>

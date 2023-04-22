@@ -129,7 +129,7 @@ export function AddressForm({
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <label
           htmlFor="province"
           className="block text-sm font-medium text-gray-700"
@@ -146,7 +146,7 @@ export function AddressForm({
             className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
           />
         </div>
-      </div>
+      </div> */}
 
       <div>
         <label
