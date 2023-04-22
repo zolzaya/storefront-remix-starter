@@ -187,8 +187,8 @@ export default function OrderHistoryItem({
           {/* More details - Could be expanded with shipping adresses, payment option, etc. */}
           {areDetailsExpanded && (
             <div className="p-2 lg:p-3 grid grid-cols-2 gap-1 text-sm max-w-sm self-center md:self-end">
-              <h6 className="font-medium col-span-full">Order summary</h6>
-              <span>Item(s) Subtotal:</span>
+              <h6 className="font-medium col-span-full">Төлбөрийн задаргаа</h6>
+              <span>Барааны нийт дүн:</span>
               <span className="text-end">
                 <Price
                   currencyCode={order?.currencyCode}
@@ -196,7 +196,7 @@ export default function OrderHistoryItem({
                 ></Price>
               </span>
 
-              <span>Shipping & handling:</span>
+              <span>Хүргэлт:</span>
               <span className="text-end">
                 <Price
                   currencyCode={order?.currencyCode}
@@ -207,7 +207,7 @@ export default function OrderHistoryItem({
                 ></Price>
               </span>
 
-              <span>Total before tax:</span>
+              {/* <span>Total before tax:</span>
               <span className="text-end">
                 <Price
                   currencyCode={order?.currencyCode}
@@ -216,9 +216,9 @@ export default function OrderHistoryItem({
                     0,
                   )}
                 ></Price>
-              </span>
+              </span> */}
 
-              <span>Estimated tax:</span>
+              {/* <span>Estimated tax:</span>
               <span className="text-end">
                 <Price
                   currencyCode={order?.currencyCode}
@@ -227,9 +227,9 @@ export default function OrderHistoryItem({
                     0,
                   )}
                 ></Price>
-              </span>
+              </span> */}
 
-              <span>Total:</span>
+              <span>Дүн:</span>
               {order?.totalWithTax && order.discounts ? (
                 <span className="text-end">
                   <Price
@@ -247,7 +247,7 @@ export default function OrderHistoryItem({
                 <span className="text-end">--</span>
               )}
 
-              <span>Applied coupons:</span>
+              <span>Купоны хөнгөлөлт:</span>
               <span className="text-end">
                 <Price
                   currencyCode={order?.currencyCode}
@@ -258,7 +258,7 @@ export default function OrderHistoryItem({
                 ></Price>
               </span>
 
-              <span className="font-medium">Grand total:</span>
+              <span className="font-medium">Нийт дүн:</span>
               <span className="font-medium text-end">
                 <Price
                   currencyCode={order?.currencyCode}
