@@ -13,7 +13,7 @@ import {
   getEligibleShippingMethods,
 } from '~/providers/checkout/checkout';
 import { shippingFormDataIsValid } from '~/utils/validation';
-import { sessionStorage } from '~/sessions';
+import { sessionStorage } from '~/servers/session.server';
 import { classNames } from '~/utils/class-names';
 import { getActiveCustomerAddresses } from '~/providers/customer/customer';
 import { AddressForm } from '~/components/account/AddressForm';

@@ -1,34 +1,17 @@
 /**
  * @type {import('@remix-run/dev/config').AppConfig}
  */
-const cloudflarePagesConfig = {
-  serverBuildTarget: 'cloudflare-pages',
-  server: './server-cloudflare-pages.js',
-  ignoredRouteFiles: ['**/.*'],
-};
-/**
- * @type {import('@remix-run/dev/config').AppConfig}
- */
-const netlifyConfig = {
-  serverBuildTarget: 'netlify',
-  server: './server-netlify.js',
-  ignoredRouteFiles: ['**/.*'],
-};
-/**
- * @type {import('@remix-run/dev/config').AppConfig}
- */
-const devConfig = {
+module.exports = {
   appDirectory: 'app',
   assetsBuildDirectory: 'public/build',
   publicPath: '/build/',
   serverBuildDirectory: 'build',
-  devServerPort: 8002,
-  ignoredRouteFiles: ['.*'],
+  // devServerPort: 8002,
+  ignoredRouteFiles: ['**/.*'],
+  // future: {
+  //   v2_errorBoundary: true,
+  //   v2_meta: true,
+  //   v2_normalizeFormMethod: true,
+  //   v2_routeConvention: true,
+  // },
 };
-
-module.exports =
-  process.env.NODE_ENV === 'development'
-    ? devConfig
-    : process.env.CF_PAGES
-    ? cloudflarePagesConfig
-    : netlifyConfig;

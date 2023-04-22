@@ -10,7 +10,6 @@ import { useRef, useState } from 'react';
 import { FacetFilterTracker } from '~/components/facet-filter/facet-filter-tracker';
 import FacetFilterControls from '~/components/facet-filter/FacetFilterControls';
 import { FiltersButton } from '~/components/FiltersButton';
-import { PhotographIcon } from '@heroicons/react/solid';
 
 export const meta: MetaFunction = ({ data }) => {
   return {
@@ -68,7 +67,7 @@ export default function CollectionSlug() {
       <Breadcrumbs items={collection.breadcrumbs}></Breadcrumbs>
       {collection.children?.length ? (
         <div className="max-w-2xl mx-auto py-16 sm:py-16 lg:max-w-none border-b mb-16">
-          <h2 className="text-2xl font-light text-gray-900">Collections</h2>
+          <h2 className="text-2xl font-light text-gray-900">Ангилал</h2>
           <div className="mt-6 grid max-w-xs sm:max-w-none mx-auto sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
             {collection.children.map((child) => (
               <CollectionCard

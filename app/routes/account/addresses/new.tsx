@@ -80,7 +80,7 @@ export default function NewAddress() {
   return (
     <div>
       <Modal isOpen={state} close={close} afterClose={afterClose}>
-        <Modal.Title>New address</Modal.Title>
+        <Modal.Title>Хаяг нэмэх</Modal.Title>
         <Modal.Body>
           <CustomerAddressForm
             availableCountries={availableCountries}

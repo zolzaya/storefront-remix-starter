@@ -15,7 +15,7 @@ import {
   ErrorResult,
   OrderDetailFragment,
 } from '~/generated/graphql';
-import { sessionStorage } from '~/sessions';
+import { sessionStorage } from '~/servers/session.server';
 import { shippingFormDataIsValid } from '~/utils/validation';
 import {
   addPaymentToOrder,

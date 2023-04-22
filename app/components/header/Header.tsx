@@ -3,15 +3,15 @@ import { classNames } from '~/utils/class-names';
 import { useRootLoader } from '~/utils/use-root-loader';
 import { useScrollingUp } from '~/utils/use-scrolling-up';
 
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
+import { Menu, Popover, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
-  UserCircleIcon,
-  XMarkIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/outline';
 import { Fragment, useState } from 'react';
+import { CustomerMenus } from './CustomerMenus';
 
 const navigation = {
   categories: [
@@ -151,8 +151,8 @@ export function Header({
   cartQuantity: number;
 }) {
   const [open, setOpen] = useState(false);
-  const data = useRootLoader();
-  const isSignedIn = !!data.activeCustomer.activeCustomer?.id;
+  const { activeCustomer, collections } = useRootLoader();
+  const isSignedIn = !!activeCustomer.activeCustomer?.id;
   const isScrollingUp = useScrollingUp();
   return (
     <div className="bg-white">
@@ -191,7 +191,7 @@ export function Header({
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="flex h-full space-x-8">
-                  {navigation.categories.map((category) => (
+                  {collections.map((category) => (
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
                         <>
@@ -228,28 +228,17 @@ export function Header({
                                 <div className="mx-auto max-w-7xl px-8">
                                   <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                                     <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                      {category.featured.map((item) => (
+                                      {category.featuredAsset && (
                                         <div
-                                          key={item.name}
+                                          key={category.featuredAsset?.id}
                                           className="group relative text-base sm:text-sm"
                                         >
                                           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                             <img
-                                              src={item.imageSrc}
-                                              alt={item.imageAlt}
+                                              src={category.featuredAsset?.preview}
                                               className="object-cover object-center"
                                             />
                                           </div>
-                                          <a
-                                            href={item.href}
-                                            className="mt-6 block font-medium text-gray-900"
-                                          >
-                                            <span
-                                              className="absolute inset-0 z-10"
-                                              aria-hidden="true"
-                                            />
-                                            {item.name}
-                                          </a>
                                           <p
                                             aria-hidden="true"
                                             className="mt-1"
@@ -257,10 +246,10 @@ export function Header({
                                             Shop now
                                           </p>
                                         </div>
-                                      ))}
+                                      )}
                                     </div>
                                     <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                      {category.sections.map((section) => (
+                                      {navigation.categories[0].sections.map((section) => (
                                         <div key={section.name}>
                                           <p
                                             id={`${section.name}-heading`}
@@ -299,22 +288,12 @@ export function Header({
                       )}
                     </Popover>
                   ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
-                  ))}
                 </div>
               </Popover.Group>
 
               <div className="ml-auto flex items-center">
                 {/* Search */}
-                <div className="flex lg:ml-6">
+                <div className="flex lg:ml-5">
                   <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
                     <span className="sr-only">Search</span>
                     <MagnifyingGlassIcon
@@ -325,7 +304,7 @@ export function Header({
                 </div>
 
                 {/* Cart */}
-                <div className="ml-4 flow-root lg:ml-6">
+                <Menu as="div" className="flex lg:ml-5">
                   <button
                     className="group -m-2 flex items-center p-2"
                     onClick={onCartIconClick}
@@ -344,18 +323,21 @@ export function Header({
                     )}
                     <span className="sr-only">items in cart, view bag</span>
                   </button>
-                </div>
+                </Menu>
 
-                {/* Account */}
-                <div className="flex lg:ml-6">
-                  <Link
-                    to={isSignedIn ? '/account' : '/sign-in'}
-                    className="p-2 text-gray-400 hover:text-gray-500"
-                  >
-                    <span className="sr-only">User</span>
-                    <UserCircleIcon className="h-6 w-6" aria-hidden="true" />
-                  </Link>
-                </div>
+                <Menu as="div" className="relative ml-3">
+                  {isSignedIn ? (
+                    <CustomerMenus />
+                  ) : (
+                    <Link
+                      to="sign-in"
+                      className="p-2 text-gray-400 hover:text-gray-500"
+                    >
+                      <span className="sr-only">User</span>
+                      <UserCircleIcon className="h-6 w-6" aria-hidden="true" />
+                    </Link>
+                  )}
+                </Menu>
               </div>
             </div>
           </div>

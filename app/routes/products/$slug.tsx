@@ -18,7 +18,7 @@ import { Breadcrumbs } from '~/components/Breadcrumbs';
 import { APP_META_TITLE } from '~/constants';
 import { CartLoaderData } from '~/routes/api/active-order';
 // import { FetcherWithComponents } from '~/types';
-import { sessionStorage } from '~/sessions';
+import { sessionStorage } from '~/servers/session.server';
 import { ErrorCode, ErrorResult } from '~/generated/graphql';
 import Alert from '~/components/Alert';
 import { StockLevelLabel } from '~/components/products/StockLevelLabel';

@@ -17,17 +17,17 @@ type OrderState = | 'Created'
 const map = new Map<string, string>([
     ['Draft', 'Draft'],
     ['AddingItems', 'Adding items'],
-    ['ArrangingPayment', 'Awaiting payment'],
-    ['PaymentAuthorized', 'Payment authorized'],
-    ['PaymentSettled', 'Payment settled'],
-    ['PartiallyShipped', 'Partially shipped'],
-    ['Shipped', 'Shipped'],
-    ['PartiallyDelivered', 'Partially delivered'],
-    ['Delivered', 'Delivered'],
-    ['Modifying', 'Modifying'],
-    ['ArrangingAdditionalPayment', 'Awaiting payment'],
-    ['Cancelled', 'Cancelled'],
-    ['Unknown', 'Unknown'],
+    ['ArrangingPayment', 'Төлбөр хүлээгдэж байгаа'],            // Awaiting payment
+    ['PaymentAuthorized', 'Төлбөр шалгаж байгаа'],              // Payment authorized
+    ['PaymentSettled', 'Төлбөр төлөгдсөн'],                     // Payment settled
+    ['PartiallyShipped', 'Хэсэгчлэн хүргэлтэнд гарсан'],        // Partially shipped
+    ['Shipped', 'Хүргэлтэнд гарсан'],                           // Shipped
+    ['PartiallyDelivered', 'Хэсэгчлэн хүргэгдсэн'],             // Partially delivered
+    ['Delivered', 'Хүргэж өгсөн'],                              // Delivered
+    ['Modifying', 'Өөрчлөгдөж байгаа'],                         // Modifying
+    ['ArrangingAdditionalPayment', 'Төлбөр хүлээж буй'],        // Awaiting payment
+    ['Cancelled', 'Цуцлагдсан'],                                // Cancelled
+    ['Unknown', 'Unknown'],                                     // Unknown 
 ]);
 
 export function OrderStateBadge({ state }: { state?: string }) {

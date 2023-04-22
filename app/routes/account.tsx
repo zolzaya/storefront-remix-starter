@@ -1,14 +1,20 @@
 import {
-  HashtagIcon,
+  KeyIcon,
   MapPinIcon,
   ShoppingBagIcon,
-  UserCircleIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/solid';
-import { Form, Outlet, useLoaderData, useMatches } from '@remix-run/react';
+import { Link, Outlet, useLocation } from '@remix-run/react';
 import { DataFunctionArgs, json, redirect } from '@remix-run/server-runtime';
-import { TabProps } from '~/components/tabs/Tab';
-import { TabsContainer } from '~/components/tabs/TabsContainer';
 import { getActiveCustomerDetails } from '~/providers/customer/customer';
+import { classNames } from '~/utils/class-names';
+
+const subNavigation = [
+  { name: 'Профайл', href: '/account', icon: UserCircleIcon },
+  { name: 'Захиалга', href: '/account/orders', icon: ShoppingBagIcon },
+  { name: 'Хаяг', href: '/account/addresses', icon: MapPinIcon },
+  { name: 'Нууц үг', href: '/account/password', icon: KeyIcon },
+]
 
 export async function loader({ request }: DataFunctionArgs) {
   const { activeCustomer } = await getActiveCustomerDetails({ request });
@@ -19,51 +25,41 @@ export async function loader({ request }: DataFunctionArgs) {
 }
 
 export default function AccountDashboard() {
-  const { activeCustomer } = useLoaderData<typeof loader>();
-  const { firstName, lastName } = activeCustomer!;
-
-  const tabs: TabProps[] = [
-    {
-      Icon: UserCircleIcon,
-      text: 'Account Details',
-      to: './',
-    },
-    {
-      Icon: ShoppingBagIcon,
-      text: 'Purchase History',
-      to: './history',
-    },
-    {
-      Icon: MapPinIcon,
-      text: 'Addresses',
-      to: './addresses',
-    },
-    {
-      Icon: HashtagIcon,
-      text: 'Password',
-      to: './password',
-    },
-  ];
-
+  const location = useLocation();
   return (
-    <div className="max-w-6xl xl:mx-auto px-4">
-      <h2 className="text-3xl sm:text-5xl font-light text-gray-900 my-8">
-        My Account
-      </h2>
-      <p className="text-gray-700 text-lg -mt-4">
-        Welcome back, {firstName} {lastName}
-      </p>
-      <Form method="post" action="/api/logout">
-        <button
-          type="submit"
-          className="underline text-primary-600 hover:text-primary-800"
-        >
-          Sign out
-        </button>
-      </Form>
-      <TabsContainer tabs={tabs}>
-        <Outlet></Outlet>
-      </TabsContainer>
-    </div>
+    <main className="mx-auto max-w-7xl pb-10 lg:py-12 lg:px-8">
+      <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
+        <aside className="py-6 px-2 sm:px-6 lg:col-span-3 lg:py-0 lg:px-0">
+          <nav className="space-y-1">
+            {subNavigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={classNames(
+                  item.href === location.pathname
+                    ? 'bg-gray-50 text-orange-600 hover:bg-white'
+                    : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50',
+                  'group rounded-md px-3 py-2 flex items-center text-sm font-medium'
+                )}
+                aria-current={item.href === location.pathname ? 'page' : undefined}
+              >
+                <item.icon
+                  className={classNames(
+                    item.href === location.pathname ? 'text-orange-500' : 'text-gray-400 group-hover:text-gray-500',
+                    'flex-shrink-0 -ml-1 mr-3 h-6 w-6'
+                  )}
+                  aria-hidden="true"
+                />
+                <span className="truncate">{item.name}</span>
+              </Link>
+            ))}
+          </nav>
+        </aside>
+
+        <div className="space-y-6 sm:px-6 lg:col-span-9 lg:px-0">
+          <Outlet />
+        </div>
+      </div>
+    </main>
   );
 }

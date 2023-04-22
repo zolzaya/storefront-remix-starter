@@ -1,7 +1,7 @@
 import { DocumentNode, print } from 'graphql';
 import { DEMO_API_URL } from './constants';
 import { getSdk } from './generated/graphql';
-import { sessionStorage } from './sessions';
+import { sessionStorage } from './servers/session.server';
 
 let API_URL =
   typeof process !== 'undefined'
