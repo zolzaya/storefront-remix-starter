@@ -8,7 +8,7 @@ export function CollectionCard({
 }) {
   return (
     <Link
-      to={'/collections/' + collection.slug}
+      to={'/t/' + collection.slug}
       prefetch="intent"
       key={collection.id}
       className="max-w-[300px] relative rounded-lg overflow-hidden hover:opacity-75 xl:w-auto"

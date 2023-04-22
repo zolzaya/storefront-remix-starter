@@ -778,6 +778,14 @@ button:disabled {
   z-index: 75;
 }
 
+#app :is(.z-50) {
+  z-index: 50;
+}
+
+#app :is(.z-auto) {
+  z-index: auto;
+}
+
 #app :is(.col-span-1) {
   grid-column: span 1 / span 1;
 }

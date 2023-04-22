@@ -223,11 +223,10 @@ export default function ProductSlug() {
                   >
                     {qtyInCart ? (
                       <span className="flex items-center">
-                        <CheckIcon className="w-5 h-5 mr-1" /> {qtyInCart} in
-                        cart
+                        <CheckIcon className="w-5 h-5 mr-1" /> {qtyInCart} сагслагдав
                       </span>
                     ) : (
-                      `Add to cart`
+                      `Сагсанд нэмэх`
                     )}
                   </button>
 
@@ -277,9 +276,9 @@ export default function ProductSlug() {
           </div>
         </div>
       </div>
-      <div className="mt-24">
+      {/* <div className="mt-24">
         <TopReviews></TopReviews>
-      </div>
+      </div> */}
     </div>
   );
 }

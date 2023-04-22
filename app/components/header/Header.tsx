@@ -248,7 +248,7 @@ export function Header({
                                         </div>
                                       )}
                                     </div>
-                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
+                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm z-50">
                                       {navigation.categories[0].sections.map((section) => (
                                         <div key={section.name}>
                                           <p

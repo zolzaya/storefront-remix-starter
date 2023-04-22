@@ -42,7 +42,7 @@ export default function Footer({
                     <li key={collection.id}>
                       <Link
                         className="text-base text-gray-500 hover:text-gray-600"
-                        to={'/collections/' + collection.slug}
+                        to={'/t/' + collection.slug}
                         prefetch="intent"
                         key={collection.id}
                       >

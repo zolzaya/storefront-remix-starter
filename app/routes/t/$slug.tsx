@@ -1,15 +1,16 @@
-import { DataFunctionArgs, MetaFunction } from '@remix-run/server-runtime';
 import { useLoaderData } from '@remix-run/react';
-import { sdk } from '../../graphqlWrapper';
-import { CollectionCard } from '~/components/collections/CollectionCard';
-import { ProductCard } from '~/components/products/ProductCard';
-import { Breadcrumbs } from '~/components/Breadcrumbs';
-import { APP_META_TITLE } from '~/constants';
-import { filteredSearchLoader } from '~/utils/filtered-search-loader';
+import { MetaFunction } from '@remix-run/server-runtime';
 import { useRef, useState } from 'react';
-import { FacetFilterTracker } from '~/components/facet-filter/facet-filter-tracker';
-import FacetFilterControls from '~/components/facet-filter/FacetFilterControls';
+import { Breadcrumbs } from '~/components/Breadcrumbs';
 import { FiltersButton } from '~/components/FiltersButton';
+import { CollectionCard } from '~/components/collections/CollectionCard';
+import FacetFilterControls from '~/components/facet-filter/FacetFilterControls';
+import { FacetFilterTracker } from '~/components/facet-filter/facet-filter-tracker';
+import { ProductCard } from '~/components/products/ProductCard';
+import { APP_META_TITLE } from '~/constants';
+
+import { loader } from "~/route-containers/collections.server";
+export { loader };
 
 export const meta: MetaFunction = ({ data }) => {
   return {
@@ -18,28 +19,6 @@ export const meta: MetaFunction = ({ data }) => {
       : APP_META_TITLE,
   };
 };
-
-export async function loader({ params, request, context }: DataFunctionArgs) {
-  const { result, resultWithoutFacetValueFilters, facetValueIds } =
-    await filteredSearchLoader({
-      params,
-      request,
-      context,
-    });
-  const collection = (await sdk.collection({ slug: params.slug })).collection;
-  if (!collection?.id || !collection?.name) {
-    throw new Response('Not Found', {
-      status: 404,
-    });
-  }
-
-  return {
-    collection,
-    result,
-    resultWithoutFacetValueFilters,
-    facetValueIds,
-  };
-}
 
 export default function CollectionSlug() {
   const { collection, result, resultWithoutFacetValueFilters, facetValueIds } =
@@ -64,7 +43,9 @@ export default function CollectionSlug() {
         />
       </div>
 
-      <Breadcrumbs items={collection.breadcrumbs}></Breadcrumbs>
+      {/* Breadcrumbs  */}
+      <Breadcrumbs items={collection.breadcrumbs} />
+
       {collection.children?.length ? (
         <div className="max-w-2xl mx-auto py-16 sm:py-16 lg:max-w-none border-b mb-16">
           <h2 className="text-2xl font-light text-gray-900">Ангилал</h2>
@@ -73,7 +54,7 @@ export default function CollectionSlug() {
               <CollectionCard
                 key={child.id}
                 collection={child}
-              ></CollectionCard>
+              />
             ))}
           </div>
         </div>
@@ -90,7 +71,7 @@ export default function CollectionSlug() {
         <div className="sm:col-span-5 lg:col-span-4">
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {result.items.map((item) => (
-              <ProductCard key={item.productId} {...item}></ProductCard>
+              <ProductCard key={item.productId} {...item} />
             ))}
           </div>
         </div>

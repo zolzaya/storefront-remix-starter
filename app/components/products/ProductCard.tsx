@@ -11,7 +11,7 @@ export function ProductCard({
   currencyCode,
 }: ProductCardProps) {
   return (
-    <Link className="flex flex-col" prefetch="intent" to={`/products/${slug}`}>
+    <Link className="flex flex-col" prefetch="intent" to={`/p/${slug}`}>
       <img
         className="rounded-xl flex-grow object-cover aspect-[7/8]"
         alt=""
