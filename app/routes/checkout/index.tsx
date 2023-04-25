@@ -171,7 +171,7 @@ export default function CheckoutShipping() {
                 htmlFor="emailAddress"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email address
+                Имэйл
               </label>
               <div className="mt-1">
                 <input
@@ -195,7 +195,7 @@ export default function CheckoutShipping() {
                   htmlFor="firstName"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  First name
+                  Нэр
                 </label>
                 <div className="mt-1">
                   <input
@@ -214,7 +214,7 @@ export default function CheckoutShipping() {
                   htmlFor="lastName"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Last name
+                  Овог
                 </label>
                 <div className="mt-1">
                   <input
@@ -257,7 +257,7 @@ export default function CheckoutShipping() {
             availableCountries={activeOrder ? availableCountries : undefined}
             address={shippingAddress}
             defaultFullName={defaultFullName}
-          ></AddressForm>
+          />
         )}
       </Form>
 

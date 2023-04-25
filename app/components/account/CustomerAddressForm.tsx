@@ -91,11 +91,12 @@ export default function CustomerAddressForm({
           name="countryCode"
           autoComplete="country"
           placeholder="-- Сонгох --"
+          defaultValue="ulaanbaatar"
           required
           label="Хот / Аймаг"
         >
           {availableCountries?.map((country) => (
-            <option key={country.id} value={country.code} selected={country.code === "ulaanbaatar"}>
+            <option key={country.id} value={country.code}>
               {country.name}
             </option>
           ))}

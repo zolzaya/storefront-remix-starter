@@ -3936,7 +3936,7 @@ export const SetOrderShippingAddressDocument = gql`
 }
     ${OrderDetailFragmentDoc}`;
 export const SetOrderShippingMethodDocument = gql`
-    mutation setOrderShippingMethod($shippingMethodId: ID!) {
+    mutation setOrderShippingMethod($shippingMethodId: [ID!]!) {
   setOrderShippingMethod(shippingMethodId: $shippingMethodId) {
     ...OrderDetail
     ... on ErrorResult {

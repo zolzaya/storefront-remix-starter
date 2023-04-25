@@ -16,7 +16,7 @@ export function AddressForm({
           htmlFor="fullName"
           className="block text-sm font-medium text-gray-700"
         >
-          First name
+          Нэр
         </label>
         <div className="mt-1">
           <input
@@ -35,7 +35,7 @@ export function AddressForm({
           htmlFor="company"
           className="block text-sm font-medium text-gray-700"
         >
-          Company
+          Компани
         </label>
         <div className="mt-1">
           <input
@@ -53,7 +53,7 @@ export function AddressForm({
           htmlFor="streetLine1"
           className="block text-sm font-medium text-gray-700"
         >
-          Address
+          Хаяг
         </label>
         <div className="mt-1">
           <input
@@ -67,56 +67,19 @@ export function AddressForm({
         </div>
       </div>
 
-      <div className="sm:col-span-2">
-        <label
-          htmlFor="streetLine2"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Apartment, suite, etc.
-        </label>
-        <div className="mt-1">
-          <input
-            type="text"
-            name="streetLine2"
-            id="streetLine2"
-            defaultValue={address?.streetLine2 ?? ''}
-            className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label
-          htmlFor="city"
-          className="block text-sm font-medium text-gray-700"
-        >
-          City
-        </label>
-        <div className="mt-1">
-          <input
-            type="text"
-            name="city"
-            id="city"
-            autoComplete="address-level2"
-            defaultValue={address?.city ?? ''}
-            className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-          />
-        </div>
-      </div>
-
       <div>
         <label
           htmlFor="countryCode"
           className="block text-sm font-medium text-gray-700"
         >
-          Country
+          Хот / Аймаг
         </label>
         <div className="mt-1">
           {availableCountries && (
             <select
               id="countryCode"
               name="countryCode"
-              defaultValue={address?.countryCode ?? 'US'}
+              defaultValue={address?.countryCode ?? 'ulaanbaatar'}
               className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
             >
               {availableCountries.map((item) => (
@@ -148,7 +111,7 @@ export function AddressForm({
         </div>
       </div> */}
 
-      <div>
+      {/* <div>
         <label
           htmlFor="postalCode"
           className="block text-sm font-medium text-gray-700"
@@ -165,14 +128,15 @@ export function AddressForm({
             className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
           />
         </div>
-      </div>
 
-      <div className="sm:col-span-2">
+      </div> */}
+
+      <div>
         <label
           htmlFor="phoneNumber"
           className="block text-sm font-medium text-gray-700"
         >
-          Phone
+          Утасны дугаар
         </label>
         <div className="mt-1">
           <input
