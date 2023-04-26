@@ -19,15 +19,15 @@ import {
 export const validator = withZod(
   z
     .object({
-      currentPassword: z.string().min(1, { message: 'Password is required' }),
-      newPassword: z.string().min(1, { message: 'Password is required' }),
-      confirmPassword: z.string().min(1, { message: 'Password is required' }),
+      currentPassword: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
+      newPassword: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
+      confirmPassword: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
     })
     .refine(
       ({ newPassword, confirmPassword }) => newPassword === confirmPassword,
       {
         path: ['confirmPassword'],
-        message: 'Passwords must match',
+        message: 'Нууц үг тохирохгүй байна',
       },
     ),
 );
@@ -93,7 +93,7 @@ export default function AccountPassword() {
               <div>
                 <Input
                   required
-                  label="Current Password"
+                  label="Одоогийн нууц үг"
                   name="currentPassword"
                   type="password"
                 />
@@ -103,7 +103,7 @@ export default function AccountPassword() {
               <div>
                 <Input
                   required
-                  label="New Password"
+                  label="Шинэ нууц үг"
                   name="newPassword"
                   type="password"
                 />
@@ -111,7 +111,7 @@ export default function AccountPassword() {
               <div>
                 <Input
                   required
-                  label="Confirm Password"
+                  label="Баталгаажуулах нууц үг"
                   name="confirmPassword"
                   type="password"
                 />
@@ -121,29 +121,29 @@ export default function AccountPassword() {
         )}
         {isSaved && (
           <SuccessMessage
-            heading="Success!"
-            message="Your password has been updated."
+            heading="Амжилттай!"
+            message="Таны нууц үг шинэчлэгдлээ."
           />
         )}
         {errorMessage && (
           <ErrorMessage
-            heading="Password not updated."
-            message={errorMessage}
+            heading="Алдаа! Нууц үг шинэчлэхэд алдаа гарлаа."
+            message="Одоогийн нууц үг тохирохгүй байна!"
           />
         )}
         {editing ? (
           <div className="flex gap-3">
             <HighlightedButton type="submit" isSubmitting={state === 'submitting'}>
-              Save Password
+              Нууц үгээ солих
             </HighlightedButton>
             <Button type="reset" onClick={() => setEditing(false)}>
-              Cancel
+              Цуцлах
             </Button>
           </div>
         ) : (
           <>
             <HighlightedButton type="button" onClick={() => setEditing(true)}>
-              <PencilIcon className="w-4 h-4" /> Change Password
+              <PencilIcon className="w-4 h-4" /> Нууц үгээ солих
             </HighlightedButton>
           </>
         )}

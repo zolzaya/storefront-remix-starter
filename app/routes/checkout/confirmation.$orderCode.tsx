@@ -100,11 +100,10 @@ export default function CheckoutConfirmation() {
     <div>
       <h2 className="text-3xl flex items-center space-x-2 sm:text-5xl font-light tracking-tight text-gray-900 my-8">
         <CheckCircleIcon className="text-green-600 w-8 h-8 sm:w-12 sm:h-12"></CheckCircleIcon>
-        <span>Order Summary</span>
+        <span>Баярлалаа</span>
       </h2>
       <p className="text-lg text-gray-700">
-        Your order <span className="font-bold">{order!.code}</span> has been
-        received!
+        Таны <span className="font-bold">{order!.code}</span> дугаартай захиалгыг хүлээн авлаа!
       </p>
       {order!.active && (
         <div className="rounded-md bg-blue-50 p-4 my-8">

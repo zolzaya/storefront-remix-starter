@@ -23,12 +23,12 @@ enum FormIntent {
   UpdateDetails = 'updateDetails',
 }
 
-export const validator = withZod(
+export const profileValidator = withZod(
   z.object({
     title: z.string(),
-    firstName: z.string().min(1, { message: 'First name is required' }),
-    lastName: z.string().min(1, { message: 'Last name is required' }),
-    phoneNumber: z.string(),
+    firstName: z.string().min(1, { message: 'Нэр хоосон байна' }),
+    lastName: z.string().min(1, { message: 'Овог хоосон байна' }),
+    phoneNumber: z.string().min(1, { message: 'Утасны дугаар хоосон байна' }),
   }),
 );
 
@@ -120,7 +120,7 @@ export async function action({ request }: DataFunctionArgs) {
   }
 
   if (intent === FormIntent.UpdateDetails) {
-    const result = await validator.validate(body);
+    const result = await profileValidator.validate(body);
 
     if (result.error) {
       return validationError(result.error);
@@ -276,7 +276,7 @@ export default function AccountDetails() {
         </div>
         <div className="border-t border-gray-200 pt-10">
           <ValidatedForm
-            validator={validator}
+            validator={profileValidator}
             formRef={formRef}
             method="post"
             id="details"
@@ -295,31 +295,31 @@ export default function AccountDetails() {
             <div className="gap-4 grid sm:grid-cols-2">
               {isEditing && (
                 <div className="col-span-2">
-                  <Input label="Title" name="title" className="sm:w-1/4" />
+                  <Input label="Гарчиг" name="title" className="sm:w-1/4" />
                 </div>
               )}
               {isEditing ? (
                 <>
                   <div>
-                    <Input label="First Name" name="firstName" required />
+                    <Input label="Овог" name="firstName" required />
                   </div>
                   <div>
-                    <Input label="Last Name" name="lastName" required />
+                    <Input label="Нэр" name="lastName" required />
                   </div>
                 </>
               ) : (
                 <div>
-                  <h3 className="text-sm text-gray-500">Full Name</h3>
+                  <h3 className="text-sm text-gray-500">Гарчиг</h3>
                   {replaceEmptyString(fullName)}
                 </div>
               )}
 
               <div>
                 {isEditing ? (
-                  <Input label="Phone Nr." name="phoneNumber" />
+                  <Input label="Phone Nr." name="phoneNumber" required />
                 ) : (
                   <div>
-                    <h3 className="text-sm text-gray-500">Phone Nr.</h3>
+                    <h3 className="text-sm text-gray-500">Утасны дугаар</h3>
                     {replaceEmptyString(phoneNumber)}
                   </div>
                 )}
@@ -330,7 +330,7 @@ export default function AccountDetails() {
                     {formError &&
                       formError.intent === FormIntent.UpdateDetails && (
                         <ErrorMessage
-                          heading="We ran into a problem updating your details!"
+                          heading="Профайлыг хадгалахад алдаа гарлаа. Дахин оролдоно уу!"
                           message={formError.message}
                         />
                       )}
@@ -340,11 +340,11 @@ export default function AccountDetails() {
                         type="submit"
                         isSubmitting={state === 'submitting'}
                       >
-                        <CheckIcon className="w-4 h-4" /> Save
+                        <CheckIcon className="w-4 h-4" /> Хадгалах
                       </HighlightedButton>
 
                       <Button type="reset" onClick={() => setIsEditing(false)}>
-                        <XMarkIcon className="w-4 h-4" /> Cancel
+                        <XMarkIcon className="w-4 h-4" /> Цуцлах
                       </Button>
                     </div>
                   </>
@@ -353,7 +353,7 @@ export default function AccountDetails() {
                     type="button"
                     onClick={() => setIsEditing(true)}
                   >
-                    <PencilIcon className="w-4 h-4" /> Edit
+                    <PencilIcon className="w-4 h-4" /> Засах
                   </HighlightedButton>
                 )}
               </div>

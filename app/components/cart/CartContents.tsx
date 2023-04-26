@@ -33,7 +33,7 @@ export function CartContents({
               <div>
                 <div className="flex justify-between text-base font-medium text-gray-900">
                   <h3>
-                    <Link to={`/products/${line.productVariant.product.slug}`}>
+                    <Link to={`/p/${line.productVariant.product.slug}`}>
                       {line.productVariant.name}
                     </Link>
                   </h3>
@@ -74,7 +74,7 @@ export function CartContents({
                   </Form>
                 ) : (
                   <div className="text-gray-800">
-                    <span className="mr-1">Quantity</span>
+                    <span className="mr-1">тоо ширхэг:</span>
                     <span className="font-medium">{line.quantity}</span>
                   </div>
                 )}

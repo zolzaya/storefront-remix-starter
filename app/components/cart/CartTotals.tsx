@@ -10,7 +10,7 @@ export function CartTotals({ order }: { order?: OrderDetailFragment | null }) {
           <Price
             priceWithTax={order?.subTotalWithTax}
             currencyCode={order?.currencyCode}
-          ></Price>
+          />
         </dd>
       </div>
       <div className="flex items-center justify-between">
@@ -19,7 +19,7 @@ export function CartTotals({ order }: { order?: OrderDetailFragment | null }) {
           <Price
             priceWithTax={order?.shippingWithTax ?? 0}
             currencyCode={order?.currencyCode}
-          ></Price>
+          />
         </dd>
       </div>
       <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -28,7 +28,7 @@ export function CartTotals({ order }: { order?: OrderDetailFragment | null }) {
           <Price
             priceWithTax={order?.totalWithTax}
             currencyCode={order?.currencyCode}
-          ></Price>
+          />
         </dd>
       </div>
     </dl>
