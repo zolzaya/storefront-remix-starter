@@ -177,7 +177,7 @@ function DefaultSparseErrorPage({ tagline, headline, description }: DefaultSpars
               to="/"
               className="text-base font-medium text-primary-600 hover:text-primary-500 inline-flex gap-2"
             >
-              Go back home
+              Эхлэл хуудас руу буцах
             </Link>
           </div>
         </main>
@@ -194,8 +194,8 @@ function DefaultSparseErrorPage({ tagline, headline, description }: DefaultSpars
  */
 export function ErrorBoundary() {
   let tagline = "Oopsy daisy";
-  let headline = "Unexpected error";
-  let description = "We couldn't handle your request. Please try again later.";
+  let headline = "Алдаа гарлаа!";
+  let description = "Бид таны хүсэлтийг биелүүлж чадсангүй. Дараа дахин оролдож үзнэ үү.";
   
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {

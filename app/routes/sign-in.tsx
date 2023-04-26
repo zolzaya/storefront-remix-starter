@@ -5,8 +5,18 @@ import { Button } from '~/components/Button';
 import { ErrorResult } from '~/generated/graphql';
 import { Input } from '~/components/Input';
 
-import { action, validator } from "~/route-containers/authentication/login.server";
+import { action } from "~/route-containers/authentication/login.server";
+import { withZod } from '@remix-validated-form/with-zod';
+import { z } from 'zod';
 export { action };
+
+
+export const validator = withZod(
+  z.object({
+    email: z.string().min(1, { message: "Имэйл хоосон байна!" }).email("Имэйл хаяг буруу байна!"),
+    password: z.string().min(1, { message: "Нууц үгээ оруулна уу!" }),
+  })
+);
 
 
 export default function SignInPage() {

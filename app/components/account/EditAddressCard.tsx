@@ -28,15 +28,15 @@ export default function EditAddressCard({
       {/* Note: Only allow closing when it isnt loading to prevent accidental closing via outside-click */}
       <Modal isOpen={isDeleteModalVisible} close={() => setDeleteModalVisible(deleteAddress.state === 'idle' ? false : true)}>
         <deleteAddress.Form method="post" preventScrollReset>
-          <Modal.Title>Remove Address</Modal.Title>
+          <Modal.Title>Хаяг устгах</Modal.Title>
           <Modal.Body>
             <div className="space-y-4 my-4">
-              Do you want to remove this address?
+              Та энэ хаягийг устгахыг хүсч байна уу?
               <input type="hidden" name="id" value={address.id} />
               {deleteAddress.data && (
                 <ErrorMessage
-                  heading='Address could not be removed'
-                  message={deleteAddress.data?.message ?? 'Something went wrong.'}
+                  heading='Хаягийг устгаж чадсангүй!'
+                  message={deleteAddress.data?.message ?? 'Алдаа гарлаа!'}
                 />
               )}
             </div>
@@ -46,7 +46,7 @@ export default function EditAddressCard({
               onClick={() => setDeleteModalVisible(false)}
               disabled={deleteAddress.state !== 'idle'}
             >
-              Cancel
+              Цуцлах
             </Button>
             <HighlightedButton
               type="submit"
@@ -55,7 +55,7 @@ export default function EditAddressCard({
               disabled={deleteAddress.state !== 'idle'}
               isSubmitting={deleteAddress.state !== 'idle'}
             >
-              Yes
+              Тийм
             </HighlightedButton>
           </Modal.Footer>
         </deleteAddress.Form>
@@ -79,14 +79,14 @@ export default function EditAddressCard({
             )}
             <div className="flex flex-col text-left text-base-regular mt-2">
               <span>
-                {address.streetLine1}
-                {address.streetLine2 && <span>, {address.streetLine2}</span>}
+                {address.streetLine1},
+                {/* {address.streetLine2 && <span>, {address.streetLine2}</span>} */}
               </span>
-              <span>
+              {/* <span>
                 {address.postalCode}, {address.city}
-              </span>
+              </span> */}
               <span>
-                {address.province && `${address.province}, `}
+                {/* {address.province && `${address.province}, `} */}
                 {address.country?.code?.toUpperCase()}
               </span>
             </div>
@@ -94,11 +94,11 @@ export default function EditAddressCard({
           {/* Default Shipping/Billing Section */}
           {(address.defaultShippingAddress || address.defaultBillingAddress) && (
             <div className='text-end text-gray-500 uppercase tracking-wider'>
-              <span className="block text-sm font-medium">Default</span>
+              <span className="block text-sm font-medium">Үндсэн</span>
               <span className="block text-xs mt-1">
-                {address.defaultShippingAddress && "Shipping"}
+                {address.defaultShippingAddress && "хүргэлтийн хаяг"}
                 {address.defaultShippingAddress && address.defaultBillingAddress && <><br />&amp;&nbsp;</>}
-                {address.defaultBillingAddress && "Billing"}</span>
+                {address.defaultBillingAddress && "төлбөрийн хаяг"}</span>
             </div>
           )}
         </div>
@@ -112,7 +112,7 @@ export default function EditAddressCard({
               to={`/account/addresses/${address.id}`}
             >
               <PencilIcon className="w-4 h-4"></PencilIcon>
-              Edit
+              Засах
             </Link>
             <button type="button"
               title="Delete this address"
@@ -125,7 +125,7 @@ export default function EditAddressCard({
                 :
                 <ArrowPathIcon className='w-4 h-4 animate-spin'></ArrowPathIcon>
               }
-              Remove
+              Устгах
             </button>
           </div>
           {(!address.defaultShippingAddress || !address.defaultBillingAddress) && (
@@ -145,7 +145,7 @@ export default function EditAddressCard({
                         :
                         <ArrowPathIcon className='w-4 h-4 animate-spin'></ArrowPathIcon>
                       }
-                      Shipping
+                      хүргэлт
                     </button>
                   </setShipping.Form>
                 )}
@@ -163,7 +163,7 @@ export default function EditAddressCard({
                         :
                         <ArrowPathIcon className='w-4 h-4 animate-spin'></ArrowPathIcon>
                       }
-                      Billing
+                      төлбөр
                     </button>
                   </setBilling.Form>
                 )}
