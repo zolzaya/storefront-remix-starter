@@ -36,9 +36,9 @@ const changeEmailValidator = withZod(
   z.object({
     email: z
       .string()
-      .min(1, { message: 'Email is required' })
-      .email('Must be a valid email'),
-    password: z.string().min(1, { message: 'Password is required' }),
+      .min(1, { message: 'Имэйл хаяг хоосон байна' })
+      .email('Имэйл хаяг буруу байна'),
+    password: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
   }),
 );
 
@@ -195,14 +195,14 @@ export default function AccountDetails() {
         size="small"
       >
         <ValidatedForm validator={changeEmailValidator} method="post">
-          <Modal.Title>Change Email Address</Modal.Title>
+          <Modal.Title>Имэйл хаягаа солих</Modal.Title>
           <Modal.Body>
             <div className="space-y-4 my-8">
               <p>
-                We will send a verification email to your new email address.
+                Бид таны шинэ имэйл хаяг руу баталгаажуулах <strong>КОД</strong> илгээх болно.
               </p>
               <p>
-                Your current email address: <strong>{emailAddress}</strong>
+                Одоогийн имэйл: <strong>{emailAddress}</strong>
               </p>
 
               <div className="space-y-1">
@@ -214,12 +214,12 @@ export default function AccountDetails() {
                 <Input
                   ref={emailInputRef}
                   autoFocus
-                  label="New Email Address"
+                  label="Шинэ имэйл хаяг"
                   name="email"
                   required
                 />
                 <Input
-                  label="Password"
+                  label="Нууц үг"
                   type="password"
                   name="password"
                   required
@@ -236,13 +236,13 @@ export default function AccountDetails() {
           </Modal.Body>
           <Modal.Footer>
             <Button type="reset" onClick={() => closeChangeEmailModal()}>
-              Cancel
+              Цуцлах
             </Button>
             <HighlightedButton
               type="submit"
               isSubmitting={state === 'submitting'}
             >
-              Save
+              Хадгалах
             </HighlightedButton>
           </Modal.Footer>
         </ValidatedForm>
@@ -251,14 +251,14 @@ export default function AccountDetails() {
       <div className="space-y-10 p-4 mt-5">
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2">
-            <h3 className="text-sm text-gray-500">E-Mail</h3>
+            <h3 className="text-sm text-gray-500">Имэйл</h3>
             {emailSavedResponse ? (
               <span>
                 <span className="italic text-gray-800">
                   {emailSavedResponse.newEmailAddress}
                 </span>
                 <span className="ml-2 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                  awaiting confirmation
+                  имэйл хаяг баталгаажуулахыг хүлээж байна
                 </span>
               </span>
             ) : (
@@ -270,7 +270,7 @@ export default function AccountDetails() {
               type="button"
               onClick={() => openChangeEmailModal()}
             >
-              <PencilIcon className="w-4 h-4" /> Change Email
+              <PencilIcon className="w-4 h-4" /> Имэйл хаяг солих
             </HighlightedButton>
           </div>
         </div>
@@ -301,10 +301,10 @@ export default function AccountDetails() {
               {isEditing ? (
                 <>
                   <div>
-                    <Input label="Овог" name="firstName" required />
+                    <Input label="Нэр" name="firstName" required />
                   </div>
                   <div>
-                    <Input label="Нэр" name="lastName" required />
+                    <Input label="Овог" name="lastName" required />
                   </div>
                 </>
               ) : (
@@ -316,7 +316,7 @@ export default function AccountDetails() {
 
               <div>
                 {isEditing ? (
-                  <Input label="Phone Nr." name="phoneNumber" required />
+                  <Input label="Утасны дугаар" name="phoneNumber" required />
                 ) : (
                   <div>
                     <h3 className="text-sm text-gray-500">Утасны дугаар</h3>

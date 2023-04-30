@@ -1,9 +1,9 @@
 import { useLoaderData, useOutletContext } from '@remix-run/react';
-import { DummyPayments } from '~/components/checkout/DummyPayments';
 import { ErrorCode, ErrorResult } from '~/generated/graphql';
 import { OutletContext } from '~/types';
 
 import { action, loader } from "~/route-containers/checkout/payment.server";
+import { DirectDepositPayment } from '~/components/checkout/DirectDepositPayment';
 export { action, loader };
 
 
@@ -20,7 +20,7 @@ export default function CheckoutPayment() {
     <div className="flex flex-col items-center divide-gray-200 divide-y">
       {eligiblePaymentMethods.map((paymentMethod: any) =>
         <div className="py-12" key={paymentMethod.id}>
-          <DummyPayments
+          <DirectDepositPayment
             paymentMethod={paymentMethod}
             paymentError={paymentError}
           />

@@ -1,5 +1,6 @@
 import { RootLoaderData } from '~/root';
 import { Link } from '@remix-run/react';
+import { HighlightedButton } from '../HighlightedButton';
 
 const navigation = {
   support: [
@@ -110,12 +111,9 @@ export default function Footer({
                 placeholder="Имэйл хаягаа оруулна уу"
               />
               <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                <button
-                  type="submit"
-                  className="w-full bg-primary-500 border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-primary-500"
-                >
+                <HighlightedButton>
                   Бүртгүүлэх
-                </button>
+                </HighlightedButton>
               </div>
             </form>
           </div>

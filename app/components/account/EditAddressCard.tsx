@@ -112,7 +112,7 @@ export default function EditAddressCard({
               to={`/account/addresses/${address.id}`}
             >
               <PencilIcon className="w-4 h-4"></PencilIcon>
-              Засах
+              засах
             </Link>
             <button type="button"
               title="Delete this address"
@@ -125,7 +125,7 @@ export default function EditAddressCard({
                 :
                 <ArrowPathIcon className='w-4 h-4 animate-spin'></ArrowPathIcon>
               }
-              Устгах
+              устгах
             </button>
           </div>
           {(!address.defaultShippingAddress || !address.defaultBillingAddress) && (

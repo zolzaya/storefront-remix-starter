@@ -175,7 +175,7 @@ function DefaultSparseErrorPage({ tagline, headline, description }: DefaultSpars
           <div className="mt-6">
             <Link
               to="/"
-              className="text-base font-medium text-primary-600 hover:text-primary-500 inline-flex gap-2"
+              className="text-base font-medium text-indigo-600 hover:text-indigo-500 inline-flex gap-2"
             >
               Эхлэл хуудас руу буцах
             </Link>
@@ -193,7 +193,7 @@ function DefaultSparseErrorPage({ tagline, headline, description }: DefaultSpars
  * As mentioned in the jsdoc for `DefaultSparseErrorPage` you should replace this to suit your needs.
  */
 export function ErrorBoundary() {
-  let tagline = "Oopsy daisy";
+  let tagline = "Shoot!";
   let headline = "Алдаа гарлаа!";
   let description = "Бид таны хүсэлтийг биелүүлж чадсангүй. Дараа дахин оролдож үзнэ үү.";
   
