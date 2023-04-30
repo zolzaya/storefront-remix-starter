@@ -22,14 +22,14 @@ export default function SuccessPage() {
                 </div>
               </div>
               <p className="text-center mb-5">
-                Your account has been created successfully! A verification link
-                has been sent to your e-mail address.
+                Таны бүртгэл амжилттай үүслээ. Баталгаажуулах холбоос бүхий имэйлийг
+                таны бүртгүүлсэн имэйл хаяг руу илгээсэн байна.
               </p>
               <button
                 type="submit"
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
               >
-                Go home
+                Эхлэл хуудас руу очих
               </button>
             </div>
           </Form>

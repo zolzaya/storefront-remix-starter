@@ -78,15 +78,14 @@ export default function VerifyTokenPage() {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm text-green-700">
-                    Your account has been verified successfully. Redirecting in
-                    5s...
+                    Таны бүртгэл амжилттай баталгаажлаа. 5 секундын нэвтрэх хуудас руу очино ...
                   </p>
                 </div>
                 <form method="post">
                   <input
                     type="hidden"
                     name="redirect"
-                    value={searchParams.get('redirectTo') || '/'}
+                    value={searchParams.get('redirectTo') || '/sign-in'}
                   />
                   <input
                     type="hidden"

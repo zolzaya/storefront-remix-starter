@@ -3,20 +3,20 @@ import { Link, useFetcher, useSearchParams } from '@remix-run/react';
 import { ValidatedForm } from 'remix-validated-form';
 import { ErrorResult } from '~/generated/graphql';
 import { Input } from '~/components/Input';
+import { passwordValidator } from '~/validators';
 
-import { action } from "~/route-containers/authentication/login.server";
-import { loginValidator } from '~/validators';
+import { action } from "~/route-containers/authentication/reset-password.server";
 export { action };
 
 
-export default function SignInPage() {
+export default function PasswordResetPage() {
   const [searchParams] = useSearchParams();
   const fetcher = useFetcher<ErrorResult>();
 
   return (
     <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Нэвтрэх</h2>
+        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Нууц үг сэргээх</h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Эсвэл{' '}
           <Link
@@ -30,7 +30,7 @@ export default function SignInPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <ValidatedForm validator={loginValidator} fetcher={fetcher} id="signInForm" method="post">
+          <ValidatedForm validator={passwordValidator} fetcher={fetcher} id="passwordResetForm" method="POST" action="/password-reset">
             <fieldset disabled={fetcher.state !== 'idle'} className="space-y-6">
               <input
                 type="hidden"
@@ -44,43 +44,6 @@ export default function SignInPage() {
                   required
                   autoComplete="email"
                  />
-              </div>
-
-              <div>
-                <Input
-                  label="Нууц үг"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="rememberMe"
-                    name="rememberMe"
-                    type="checkbox"
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    defaultChecked
-                  />
-                  <label
-                    htmlFor="rememberMe"
-                    className="ml-2 block text-sm text-gray-900"
-                  >
-                    Намайг сана
-                  </label>
-                </div>
-
-                <div className="text-sm">
-                  <Link
-                    to="/password-reset"
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    Нууц үгээ мартсан уу?
-                  </Link>
-                </div>
               </div>
 
               {fetcher.data && fetcher.state === 'idle' && (
@@ -97,8 +60,7 @@ export default function SignInPage() {
                         Алдаа
                       </h3>
                       <p className="text-sm text-red-700 mt-2">
-                        Нэвтрэх нэр эсвэл нууц үг буруу байна!
-                        {/* {login.data.message} */}
+                        Системийн алдаа гарсан тул та хэсэг хугацааны дараа дахин оролдоно уу!
                       </p>
                     </div>
                   </div>
@@ -112,7 +74,7 @@ export default function SignInPage() {
                 >
                   <span className='flex gap-4 items-center'>
                     {fetcher.state !== 'idle' && <ArrowPathIcon className="animate-spin h-5 w-5 text-gray-500" />}
-                    Нэвтрэх
+                    Нууц үг сэргээх
                   </span>
                 </button>
               </div>

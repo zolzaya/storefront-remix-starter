@@ -1,6 +1,8 @@
 import { RootLoaderData } from '~/root';
 import { Link } from '@remix-run/react';
 import { HighlightedButton } from '../HighlightedButton';
+import { SubscriptionForm } from './SubscriptionForm';
+import { ClientOnly } from 'remix-utils';
 
 const navigation = {
   support: [
@@ -90,33 +92,11 @@ export default function Footer({
               </div>
             </div> */}
           </div>
-          <div className="mt-8 xl:mt-0">
-            <h3 className="text-sm font-semibold text-gray-500 tracking-wider uppercase">
-              superb.mn имэйлд бүртгүүлэх
-            </h3>
-            <p className="mt-4 text-base text-gray-500">
-              Be the first to know about exclusive offers & deals.
-            </p>
-            <form className="mt-4 sm:flex sm:max-w-md">
-              <label htmlFor="email-address" className="sr-only">
-                Имэйл хаяг
-              </label>
-              <input
-                type="email"
-                name="email-address"
-                id="email-address"
-                autoComplete="email"
-                required
-                className="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
-                placeholder="Имэйл хаягаа оруулна уу"
-              />
-              <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                <HighlightedButton>
-                  Бүртгүүлэх
-                </HighlightedButton>
-              </div>
-            </form>
-          </div>
+
+          <ClientOnly fallback={<></>}>
+            {() => <SubscriptionForm /> }
+          </ClientOnly>
+
         </div>
         <div className="mt-8 border-t pt-8">
           <Link

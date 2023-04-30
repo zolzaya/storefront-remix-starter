@@ -64,15 +64,15 @@ export default function VerifyEmailAddressChangeTokenPage() {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm text-green-700">
-                    Your new E-Mail address has been verified successfully.
-                    Redirecting in 5s...
+                    Таны шинэ имэйл хаяг амжилттай баталгаажлаа.
+                    5 секундын дотор нэвтрэх хуудас руу очино ...
                   </p>
                 </div>
                 <form method="post">
                   <input
                     type="hidden"
                     name="redirect"
-                    value={searchParams.get('redirectTo') || '/'}
+                    value={searchParams.get('redirectTo') || '/sign-in'}
                   />
                   <button
                     ref={btnRef}
