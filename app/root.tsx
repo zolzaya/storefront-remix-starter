@@ -193,7 +193,7 @@ function DefaultSparseErrorPage({ tagline, headline, description }: DefaultSpars
  * As mentioned in the jsdoc for `DefaultSparseErrorPage` you should replace this to suit your needs.
  */
 export function ErrorBoundary() {
-  let tagline = "Shoot!";
+  let tagline = "Oops!";
   let headline = "Алдаа гарлаа!";
   let description = "Бид таны хүсэлтийг биелүүлж чадсангүй. Дараа дахин оролдож үзнэ үү.";
   

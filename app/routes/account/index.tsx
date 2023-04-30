@@ -1,4 +1,5 @@
 import { CheckIcon, PencilIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import { useActionData, useLoaderData, useNavigation } from '@remix-run/react';
 import { DataFunctionArgs, json, redirect } from '@remix-run/server-runtime';
 import { withZod } from '@remix-validated-form/with-zod';
@@ -198,12 +199,25 @@ export default function AccountDetails() {
           <Modal.Title>Имэйл хаягаа солих</Modal.Title>
           <Modal.Body>
             <div className="space-y-4 my-8">
-              <p>
-                Бид таны шинэ имэйл хаяг руу баталгаажуулах <strong>КОД</strong> илгээх болно.
-              </p>
-              <p>
-                Одоогийн имэйл: <strong>{emailAddress}</strong>
-              </p>
+
+              <div className="rounded-md bg-yellow-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <ExclamationTriangleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-yellow-800">Анхааруулга</h3>
+                    <div className="mt-2 text-sm text-yellow-700">
+                      <p>
+                        Бид таны шинэ имэйл хаяг руу баталгаажуулах <strong>КОД</strong> илгээх болно.
+                      </p><br />
+                      <p>
+                        Одоогийн имэйл: <strong>{emailAddress}</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div className="space-y-1">
                 <input
