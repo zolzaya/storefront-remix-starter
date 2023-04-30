@@ -3889,10 +3889,6 @@ export const ActiveCustomerOrderListDocument = gql`
           quantity
           discountedLinePriceWithTax
           discountedUnitPriceWithTax
-          fulfillments {
-            updatedAt
-            state
-          }
           featuredAsset {
             name
             source

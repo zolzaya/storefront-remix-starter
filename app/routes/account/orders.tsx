@@ -46,9 +46,8 @@ export default function AccountHistory() {
 
       {/* Pagination */}
       <div className="flex flex-row justify-between items-center gap-4">
-        <span className="self-start text-gray-500 text-sm ml-4 lg:ml-6 mt-2">
-          Showing orders {showingOrdersFrom} to {showingOrdersTo} of{' '}
-          {orderList.totalItems}
+        <span className="self-start text-gray-500 text-sm xs:ml-4 mt-2">
+          Нийт {orderList.totalItems} захиалгын {showingOrdersFrom} - {showingOrdersTo} харуулж байна
         </span>
         <ValidatedForm
           className="flex flex-col md:flex-row justify-center items-end md:items-center gap-4 lg:gap-6"
@@ -87,7 +86,7 @@ export default function AccountHistory() {
               }
               className="!text-sm rounded-r-none border-r-0"
             >
-              Prev.
+              Өмнөх
             </Button>
             <Button
               name="page"
@@ -99,7 +98,7 @@ export default function AccountHistory() {
               }
               className="!text-sm rounded-l-none"
             >
-              Next
+              Дараах
             </Button>
           </div>
         </ValidatedForm>

@@ -71,7 +71,7 @@ export default function OrderHistoryItem({
         </div>
 
         {/* Status + Actions */}
-        <div className="gap-4 lg:gap-6 flex flex-col items-end self-stretch justify-between md:flex-row md:items-center self-start">
+        <div className="gap-4 lg:gap-6 flex flex-col items-end justify-between md:flex-row md:items-center self-start">
           <OrderStateBadge state={order?.state} />
           <div className="flex" role="group">
             <Button
