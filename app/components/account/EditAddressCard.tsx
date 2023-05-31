@@ -3,8 +3,8 @@ import { Link, useFetcher } from '@remix-run/react';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { Address, ErrorResult } from '~/generated/graphql';
-import { Button } from '../Button';
 import { ErrorMessage } from '../ErrorMessage';
+import { SfButton } from '@storefront-ui/react';
 import { HighlightedButton } from '../HighlightedButton';
 import Modal from '../modal/Modal';
 
@@ -42,12 +42,13 @@ export default function EditAddressCard({
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="button"
+            <SfButton type="button"
+              variant="tertiary"
               onClick={() => setDeleteModalVisible(false)}
               disabled={deleteAddress.state !== 'idle'}
             >
               Цуцлах
-            </Button>
+            </SfButton>
             <HighlightedButton
               type="submit"
               name='_action'

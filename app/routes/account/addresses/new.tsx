@@ -8,8 +8,8 @@ import {
 import { DataFunctionArgs, json } from '@remix-run/server-runtime';
 import { useRef, useEffect } from 'react';
 import { validationError } from 'remix-validated-form';
-import { Button } from '~/components/Button';
 import Modal from '~/components/modal/Modal';
+import { SfButton } from '@storefront-ui/react';
 import { HighlightedButton } from '~/components/HighlightedButton';
 import useToggleState from '~/utils/use-toggle-state';
 import CustomerAddressForm, {
@@ -91,9 +91,9 @@ export default function NewAddress() {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button type="button" onClick={close}>
+          <SfButton type="button" variant="tertiary" onClick={close}>
             Цуцлах
-          </Button>
+          </SfButton>
           <HighlightedButton
             isSubmitting={navigation.state === 'submitting'}
             type="submit"

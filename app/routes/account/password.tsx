@@ -5,7 +5,7 @@ import { withZod } from '@remix-validated-form/with-zod';
 import { useEffect, useRef, useState } from 'react';
 import { ValidatedForm, validationError } from 'remix-validated-form';
 import { z } from 'zod';
-import { Button } from '~/components/Button';
+import { SfButton } from '@storefront-ui/react';
 import { ErrorMessage } from '~/components/ErrorMessage';
 import { HighlightedButton } from '~/components/HighlightedButton';
 import { Input } from '~/components/Input';
@@ -136,9 +136,9 @@ export default function AccountPassword() {
             <HighlightedButton type="submit" isSubmitting={state === 'submitting'}>
               Нууц үгээ солих
             </HighlightedButton>
-            <Button type="reset" onClick={() => setEditing(false)}>
+            <SfButton variant="tertiary" type="reset" onClick={() => setEditing(false)}>
               Цуцлах
-            </Button>
+            </SfButton>
           </div>
         ) : (
           <>

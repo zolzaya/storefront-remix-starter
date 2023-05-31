@@ -1,7 +1,6 @@
 import { Link } from '@remix-run/react';
 import { classNames } from '~/utils/class-names';
 import { useRootLoader } from '~/utils/use-root-loader';
-import { useScrollingUp } from '~/utils/use-scrolling-up';
 
 import { Menu, Popover, Transition } from '@headlessui/react';
 import {
@@ -153,7 +152,6 @@ export function Header({
   const [open, setOpen] = useState(false);
   const { activeCustomer, collections } = useRootLoader();
   const isSignedIn = !!activeCustomer.activeCustomer?.id;
-  const isScrollingUp = useScrollingUp();
   return (
     <div className="bg-white">
       <header className="relative bg-white">

@@ -1,5 +1,5 @@
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
-import { useLoaderData, useNavigation, useSubmit, useTransition } from '@remix-run/react';
+import { useLoaderData, useNavigation, useSubmit } from '@remix-run/react';
 import { ValidatedForm } from 'remix-validated-form';
 import { Button } from '~/components/Button';
 import { Select } from '~/components/Select';
@@ -29,8 +29,8 @@ export default function AccountHistory() {
       {orderList.items.length === 0 && (
         <div className="py-16 text-3xl text-center italic text-gray-300 select-none flex justify-center items-center">
           {orderList.totalItems === 0
-            ? 'Your future orders will appear here'
-            : 'No more orders, end reached'}
+            ? 'Захиалга бүртгэгдээгүй байна.'
+            : 'Захиалгуудын төгсгөлд ирлээ.'}
         </div>
       )}
       {/* The actual orders */}
@@ -65,7 +65,6 @@ export default function AccountHistory() {
             <Select
               name="limit"
               required
-              noPlaceholder
               defaultValue={appliedPaginationLimit}
             >
               {Array.from(ALLOWED_PAGINATION_LIMITS).map((x) => (

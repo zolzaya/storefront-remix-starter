@@ -22,9 +22,9 @@ import { sessionStorage } from '~/servers/session.server';
 import { ErrorCode, ErrorResult } from '~/generated/graphql';
 import Alert from '~/components/Alert';
 import { StockLevelLabel } from '~/components/products/StockLevelLabel';
-import TopReviews from '~/components/products/TopReviews';
 import { ScrollableContainer } from '~/components/products/ScrollableContainer';
 import { HighlightedButton } from '~/components/HighlightedButton';
+import { SfButton } from '@storefront-ui/react';
 
 export const meta: MetaFunction = ({ data }) => {
   return {
@@ -59,7 +59,6 @@ export const unstable_shouldReload: ShouldReloadFunction = () => true;
 
 export default function ProductSlug() {
   const { product, error } = useLoaderData<typeof loader>();
-  const caught = useCatch();
   const { activeOrderFetcher } = useOutletContext<{
     activeOrderFetcher: FetcherWithComponents<CartLoaderData>;
   }>();
@@ -224,14 +223,22 @@ export default function ProductSlug() {
                   >
                     {qtyInCart ? (
                       <span className="flex items-center">
-                        <CheckIcon className="w-5 h-5 mr-1" /> {qtyInCart} сагслагдав
+                        <CheckIcon className="w-5 h-5 mr-1" /> {qtyInCart}{' '}
+                        сагслагдав
                       </span>
                     ) : (
                       `Сагсанд нэмэх`
                     )}
                   </button>
 
-                  <button
+                  <SfButton type="button" className="ml-4 py-3 px-3" variant="tertiary" square aria-label="Add to favorites">
+                    <HeartIcon
+                      className="h-6 w-6 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                  </SfButton>
+
+                  {/* <button
                     type="button"
                     className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
                   >
@@ -240,7 +247,7 @@ export default function ProductSlug() {
                       aria-hidden="true"
                     />
                     <span className="sr-only">Add to favorites</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <div className="mt-2 flex items-center space-x-2">

@@ -5,6 +5,7 @@ import { ValidatedForm } from 'remix-validated-form';
 import { Address, AvailableCountriesQuery } from '~/generated/graphql';
 import { Input } from '~/components/Input';
 import { Select } from '~/components/Select';
+import { SfSelect } from '@storefront-ui/react';
 
 export const validator = withZod(
   z.object({
@@ -66,32 +67,11 @@ export default function CustomerAddressForm({
           required
           autoComplete="address-line1"
         />
-        {/* <Input
-          label="Apartment, suite, etc."
-          name="streetLine2"
-          autoComplete="address-line2"
-        /> */}
-        {/* <input type="hidden" name="postalcode" value="210200" />
-        <input type="hidden" name="city" value="ub" /> */}
-        {/* <div className="grid grid-cols-[144px_1fr] gap-x-2">
-          <Input
-            label="Postal code"
-            name="postalCode"
-            required
-            autoComplete="postal-code"
-          />
-          <Input label="City" name="city" required autoComplete="locality" />
-        </div> */}
-        {/* <Input
-          label="Province / State"
-          name="province"
-          autoComplete="address-level1"
-        /> */}
         <Select
           name="countryCode"
           autoComplete="country"
           placeholder="-- Сонгох --"
-          defaultValue="ulaanbaatar"
+          defaultValue="MN-001"
           required
           label="Хот / Аймаг"
         >

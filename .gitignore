@@ -5,6 +5,6 @@ node_modules
 /public/build
 .env
 /.idea
+.DS_Store
 /functions
-/.netlify
 /app/styles/app.css

@@ -1,6 +1,7 @@
-import { Form, Link, useFetcher, useOutletContext } from '@remix-run/react';
+import { Form, Link } from '@remix-run/react';
 import { Price } from '~/components/products/Price';
 import { ActiveOrderQuery, CurrencyCode } from '~/generated/graphql';
+import QuantitySelector from '../products/QuantitySelector';
 
 export function CartContents({
   orderLines,
@@ -51,26 +52,7 @@ export function CartContents({
                     <label htmlFor={`quantity-${line.id}`} className="mr-2">
                       Тоо ширхэг
                     </label>
-                    <select
-                      disabled={!isEditable}
-                      id={`quantity-${line.id}`}
-                      name={`quantity-${line.id}`}
-                      value={line.quantity}
-                      onChange={(e) =>
-                        adjustOrderLine &&
-                        adjustOrderLine(line.id, +e.target.value)
-                      }
-                      className="max-w-full rounded-md border border-gray-300 py-1.5 text-base leading-5 font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                    >
-                      <option value={1}>1</option>
-                      <option value={2}>2</option>
-                      <option value={3}>3</option>
-                      <option value={4}>4</option>
-                      <option value={5}>5</option>
-                      <option value={6}>6</option>
-                      <option value={7}>7</option>
-                      <option value={8}>8</option>
-                    </select>
+                    <QuantitySelector lineId={line.id} cssClasses="mt-2" max={10} disabled={false} adjustOrderLine={adjustOrderLine} />
                   </Form>
                 ) : (
                   <div className="text-gray-800">

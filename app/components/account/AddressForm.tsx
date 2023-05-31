@@ -92,45 +92,6 @@ export function AddressForm({
         </div>
       </div>
 
-      {/* <div>
-        <label
-          htmlFor="province"
-          className="block text-sm font-medium text-gray-700"
-        >
-          State / Province
-        </label>
-        <div className="mt-1">
-          <input
-            type="text"
-            name="province"
-            id="province"
-            defaultValue={address?.province ?? ''}
-            autoComplete="address-level1"
-            className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-          />
-        </div>
-      </div> */}
-
-      {/* <div>
-        <label
-          htmlFor="postalCode"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Postal code
-        </label>
-        <div className="mt-1">
-          <input
-            type="text"
-            name="postalCode"
-            id="postalCode"
-            defaultValue={address?.postalCode ?? ''}
-            autoComplete="postal-code"
-            className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-          />
-        </div>
-
-      </div> */}
-
       <div>
         <label
           htmlFor="phoneNumber"

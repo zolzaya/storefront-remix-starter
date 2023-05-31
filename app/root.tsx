@@ -14,7 +14,6 @@ import {
 import styles from './styles/app.css';
 import {
   DataFunctionArgs,
-  MetaFunction,
   json,
 } from '@remix-run/server-runtime';
 import { getCollections } from '~/providers/collections/collections';
@@ -23,13 +22,13 @@ import { APP_META_DESCRIPTION, APP_META_TITLE } from '~/constants';
 import { useEffect, useState } from 'react';
 import { CartTray } from '~/components/cart/CartTray';
 import { getActiveCustomer } from '~/providers/customer/customer';
-import Footer from '~/components/footer/Footer';
 import { useActiveOrder } from '~/utils/use-active-order';
 import { setApiUrl } from '~/graphqlWrapper';
-import { Header } from './components/header/Header';
+import Header from './components/home/Header';
+import Footer from './components/home/Footer';
 
-export const meta: MetaFunction = () => {
-  return { title: APP_META_TITLE, description: APP_META_DESCRIPTION };
+export function meta() {
+  return [{ title: APP_META_TITLE, description: APP_META_DESCRIPTION }];
 };
 
 export function links() {
@@ -113,20 +112,24 @@ export default function App() {
         <Links />
       </head>
       <body>
+
         <Header
           onCartIconClick={() => setOpen(!open)}
           cartQuantity={activeOrder?.totalQuantity ?? 0}
+          collections={collections}
         />
-        <main className="">
-          <Outlet
-            context={{
-              activeOrderFetcher,
-              activeOrder,
-              adjustOrderLine,
-              removeItem,
-            }}
-          />
-        </main>
+
+        <Outlet
+          context={{
+            activeOrderFetcher,
+            activeOrder,
+            adjustOrderLine,
+            removeItem,
+          }}
+        />
+
+        <Footer collections={collections} />
+
         <CartTray
           open={open}
           onClose={setOpen}
@@ -136,7 +139,6 @@ export default function App() {
         />
         <ScrollRestoration />
         <Scripts />
-        <Footer collections={collections}></Footer>
 
         {devMode && <LiveReload />}
       </body>

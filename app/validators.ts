@@ -7,6 +7,14 @@ export const passwordValidator = withZod(
   })
 );
 
+
+export const emailValidator = withZod(
+  z.object({
+    email: z.string().min(1, { message: "Имэйл хоосон байна!" }).email("Имэйл хаяг буруу байна!"),
+  })
+);
+
+
 export const loginValidator = withZod(
   z.object({
     email: z.string().min(1, { message: "Имэйл хоосон байна!" }).email("Имэйл хаяг буруу байна!"),

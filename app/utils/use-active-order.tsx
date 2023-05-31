@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 export function useActiveOrder() {
   const activeOrderFetcher = useFetcher<CartLoaderData>();
   useEffect(() => {
-    if (activeOrderFetcher.type === 'init') {
+    // equavalent to fetcher.type === 'init'
+    if (activeOrderFetcher.state === 'idle' && !activeOrderFetcher.data) {
       activeOrderFetcher.load('/api/active-order');
     }
   }, [activeOrderFetcher]);

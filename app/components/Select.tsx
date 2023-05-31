@@ -1,11 +1,13 @@
 import React, { SelectHTMLAttributes } from 'react';
 import { useField } from 'remix-validated-form';
 import FormElement from './FormElement';
+import { SfSelect } from '@storefront-ui/react';
 
 export type SelectProps = {
   placeholder?: string;
-  noPlaceholder?: boolean;
   label?: string;
+  required?: boolean;
+  defaultValue?: any;
   name: string;
 } & SelectHTMLAttributes<HTMLSelectElement>;
 
@@ -15,27 +17,24 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     label,
     required,
     defaultValue,
-    placeholder = 'Select...',
-    noPlaceholder = false,
+    placeholder = '- Сонгох -',
     children,
-    ...props
+    // ...props
   }, ref) => {
-    const { getInputProps } = useField(name);
+    const { error, getInputProps } = useField(name);
 
     return (
       <FormElement name={name} label={label} required={required}>
-        <select
-          ref={ref}
-          {...props}
+        <SfSelect
+          // {...props}
+          name={name}
+          invalid={error !== undefined}
           defaultValue={defaultValue}
-          className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-          {...getInputProps({})}
+          // {...getInputProps({})}
+          placeholder={placeholder}
         >
-          {!noPlaceholder && (
-            <option value="">{placeholder}</option>
-          )}
           {children}
-        </select>
+        </SfSelect>
       </FormElement>
     );
   },
