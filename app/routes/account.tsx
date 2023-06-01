@@ -4,8 +4,9 @@ import {
   ShoppingBagIcon,
   UserCircleIcon
 } from '@heroicons/react/24/solid';
-import { Link, Outlet, useLocation } from '@remix-run/react';
+import { Form, Link, Outlet, useLocation } from '@remix-run/react';
 import { DataFunctionArgs, json, redirect } from '@remix-run/server-runtime';
+import { SfButton, SfIconLogout } from '@storefront-ui/react';
 import { getActiveCustomerDetails } from '~/providers/customer/customer';
 import { classNames } from '~/utils/class-names';
 
@@ -53,6 +54,13 @@ export default function AccountDashboard() {
                 <span className="truncate">{item.name}</span>
               </Link>
             ))}
+
+            <Form method="post" action="/api/logout">
+              <SfButton slotPrefix={<SfIconLogout />}
+               type="submit" variant="tertiary" size="sm" className="w-full hover:bg-gray-50">
+                Гарах
+              </SfButton>
+            </Form>
           </nav>
         </aside>
 

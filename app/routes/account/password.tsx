@@ -1,58 +1,22 @@
 import { PencilIcon } from '@heroicons/react/24/outline';
 import { useActionData, useNavigation } from '@remix-run/react';
-import { DataFunctionArgs, json } from '@remix-run/server-runtime';
-import { withZod } from '@remix-validated-form/with-zod';
-import { useEffect, useRef, useState } from 'react';
-import { ValidatedForm, validationError } from 'remix-validated-form';
-import { z } from 'zod';
 import { SfButton } from '@storefront-ui/react';
+import { useEffect, useRef, useState } from 'react';
+import { ValidatedForm } from 'remix-validated-form';
 import { ErrorMessage } from '~/components/ErrorMessage';
 import { HighlightedButton } from '~/components/HighlightedButton';
 import { Input } from '~/components/Input';
 import { SuccessMessage } from '~/components/SuccessMessage';
-import { updateCustomerPassword } from '~/providers/account/account';
 import {
   isErrorResult,
   isValidationErrorResponseData,
 } from '~/utils/validation-helper';
 
-export const validator = withZod(
-  z
-    .object({
-      currentPassword: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
-      newPassword: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
-      confirmPassword: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
-    })
-    .refine(
-      ({ newPassword, confirmPassword }) => newPassword === confirmPassword,
-      {
-        path: ['confirmPassword'],
-        message: 'Нууц үг тохирохгүй байна',
-      },
-    ),
-);
 
-export async function action({ request }: DataFunctionArgs) {
-  const body = await request.formData();
+import { action } from "~/route-containers/account/password.server";
+export { action };
 
-  const result = await validator.validate(body);
-  if (result.error) {
-    return validationError(result.error);
-  }
-
-  const { currentPassword, newPassword } = result.data;
-
-  const res = await updateCustomerPassword(
-    { currentPassword, newPassword },
-    { request },
-  );
-
-  if (res.__typename !== 'Success') {
-    return json(res, { status: 401 });
-  }
-
-  return json(res);
-}
+import { customerChangePasswordValidator } from '~/validators';
 
 export default function AccountPassword() {
   const [editing, setEditing] = useState(false);
@@ -85,7 +49,7 @@ export default function AccountPassword() {
   }, [actionDataHook]);
 
   return (
-    <ValidatedForm validator={validator} method="post" formRef={formRef}>
+    <ValidatedForm validator={customerChangePasswordValidator} method="post" formRef={formRef}>
       <div className="p-4 space-y-4">
         {editing && (
           <>

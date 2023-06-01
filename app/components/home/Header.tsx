@@ -10,8 +10,10 @@ import {
   SfListItem,
   useDisclosure,
   useTrapFocus,
+  SfInput,
+  SfIconSearch,
 } from '@storefront-ui/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
 import { CSSTransition } from 'react-transition-group';
 import { Link } from '@remix-run/react';
@@ -26,14 +28,23 @@ export default function Header({
   onCartIconClick,
   cartQuantity,
   collections,
+  isSignedIn,
 } : {
   onCartIconClick: () => void;
   cartQuantity: number;
   collections: RootLoaderData['collections'];
+  isSignedIn: boolean;
 }) {
   const { close, toggle, isOpen } = useDisclosure({ initialValue: false });
+  const [inputValue, setInputValue] = useState('');
   const drawerRef = useRef(null);
   const menuRef = useRef(null);
+
+  const search = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    alert(`Successfully found 10 results for ${inputValue}`);
+  };
+
   useTrapFocus(drawerRef, { activeState: isOpen, arrowKeysOn: true });
   useClickAway(menuRef, () => {
     close();
@@ -172,6 +183,7 @@ export default function Header({
                 </CSSTransition>
               </li>
             </ul>
+
             <div className="flex flex-nowrap">
               <SfButton
                 className="mr-2 -ml-0.5 text-white bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-900 active:text-white"
@@ -183,16 +195,16 @@ export default function Header({
                 onClick={onCartIconClick}
                 square
               />
-              <SfButton
+              {/* <SfButton
                 className="mr-2 -ml-0.5 text-white bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-900 active:text-white"
                 key={"wishlist"}
                 aria-label={"Хадгалсан"}
                 variant="tertiary"
                 slotPrefix={<SfIconFavorite />}
                 square
-              />
+              /> */}
 
-              <Link to="sign-in">
+              <Link to={isSignedIn ? "/account" : "/sign-in"}>
                 <SfButton
                   className="mr-2 -ml-0.5 text-white bg-transparent hover:bg-primary-800 hover:text-white active:bg-primary-900 active:text-white"
                   key={"login"}
@@ -200,9 +212,7 @@ export default function Header({
                   variant="tertiary"
                   slotPrefix={<SfIconPerson />}
                   square
-                >
-                  <p className="hidden md:inline-flex">Нэвтрэх</p>
-                </SfButton>
+                />
               </Link>
             </div>
           </nav>

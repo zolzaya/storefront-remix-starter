@@ -1,8 +1,9 @@
 import type { ActionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { redirect } from '@remix-run/server-runtime';
+import { DataFunctionArgs, redirect } from '@remix-run/server-runtime';
 import { validationError } from "remix-validated-form";
 import { login } from '~/providers/account/account';
+import { getActiveCustomerDetails } from "~/providers/customer/customer";
 import { loginValidator } from "~/validators";
 
 export const action = async ({ request }: ActionArgs) => {
@@ -28,4 +29,13 @@ export const action = async ({ request }: ActionArgs) => {
     });
   }
 }
- 
+
+
+export async function loader({ request }: DataFunctionArgs) {
+  const { activeCustomer } = await getActiveCustomerDetails({ request });
+  if(activeCustomer) {
+    return redirect('/account');
+  }
+
+  return json({});
+}

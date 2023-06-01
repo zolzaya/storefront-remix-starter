@@ -1,0 +1,22 @@
+{
+  "entry": [
+    "app/**/*.{js,ts}"
+  ],
+  "extensions": [
+    ".ts",
+    ".js"
+  ],
+  "ignorePatterns": [
+    "node_modules/**",
+    "build/**",
+    "public/**"
+  ],
+  "ignoreUnimported": [
+    "postcss.config.js",
+    "remix.config.js",
+    "remix.env.d.ts",
+    "tailwind.config.js"
+  ],
+  "ignoreUnused": [],
+  "ignoreUnresolved": []
+}

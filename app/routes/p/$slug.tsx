@@ -1,61 +1,51 @@
-import {
-  DataFunctionArgs,
-  MetaFunction,
-  json,
-} from '@remix-run/server-runtime';
-import { useState, useRef, RefObject, useEffect } from 'react';
-import { Price } from '~/components/products/Price';
-import { getProductBySlug } from '~/providers/products/products';
+import { CheckIcon, HeartIcon, PhotoIcon } from '@heroicons/react/24/solid';
 import {
   FetcherWithComponents,
-  ShouldReloadFunction,
-  useCatch,
+  ShouldRevalidateFunction,
+  V2_MetaFunction,
   useLoaderData,
-  useOutletContext,
+  useOutletContext
 } from '@remix-run/react';
-import { CheckIcon, HeartIcon, PhotoIcon } from '@heroicons/react/24/solid';
+import { useState } from 'react';
 import { Breadcrumbs } from '~/components/Breadcrumbs';
+import { Price } from '~/components/products/Price';
 import { APP_META_TITLE } from '~/constants';
 import { CartLoaderData } from '~/routes/api/active-order';
 // import { FetcherWithComponents } from '~/types';
-import { sessionStorage } from '~/servers/session.server';
-import { ErrorCode, ErrorResult } from '~/generated/graphql';
-import Alert from '~/components/Alert';
-import { StockLevelLabel } from '~/components/products/StockLevelLabel';
-import { ScrollableContainer } from '~/components/products/ScrollableContainer';
-import { HighlightedButton } from '~/components/HighlightedButton';
 import { SfButton } from '@storefront-ui/react';
+import Alert from '~/components/Alert';
+import { ScrollableContainer } from '~/components/products/ScrollableContainer';
+import { StockLevelLabel } from '~/components/products/StockLevelLabel';
+import { ErrorCode, ErrorResult } from '~/generated/graphql';
 
-export const meta: MetaFunction = ({ data }) => {
-  return {
+
+import { loader } from "~/route-containers/product.server";
+export { loader };
+
+
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+  return [{
     title: data?.product?.name
       ? `${data.product.name} - ${APP_META_TITLE}`
       : APP_META_TITLE,
-  };
+  }];
 };
 
-export async function loader({ params, request }: DataFunctionArgs) {
-  const { product } = await getProductBySlug(params.slug!, { request });
-  if (!product) {
-    throw new Response('Not Found', {
-      status: 404,
-    });
-  }
-  const session = await sessionStorage.getSession(
-    request?.headers.get('Cookie'),
-  );
-  const error = session.get('activeOrderError');
-  return json(
-    { product: product!, error },
-    {
-      headers: {
-        'Set-Cookie': await sessionStorage.commitSession(session),
-      },
-    },
-  );
-}
 
-export const unstable_shouldReload: ShouldReloadFunction = () => true;
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  actionResult,
+  currentParams,
+  currentUrl,
+  defaultShouldRevalidate,
+  formAction,
+  formData,
+  formEncType,
+  formMethod,
+  nextParams,
+  nextUrl,
+}) => {
+  return true;
+};
 
 export default function ProductSlug() {
   const { product, error } = useLoaderData<typeof loader>();

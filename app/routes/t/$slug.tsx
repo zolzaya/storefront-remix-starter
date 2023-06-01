@@ -1,5 +1,4 @@
-import { useLoaderData } from '@remix-run/react';
-import { MetaFunction } from '@remix-run/server-runtime';
+import { V2_MetaFunction, useLoaderData } from '@remix-run/react';
 import { useRef, useState } from 'react';
 import { Breadcrumbs } from '~/components/Breadcrumbs';
 import { FiltersButton } from '~/components/FiltersButton';
@@ -12,12 +11,12 @@ import { APP_META_TITLE } from '~/constants';
 import { loader } from "~/route-containers/collections.server";
 export { loader };
 
-export const meta: MetaFunction = ({ data }) => {
-  return {
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+  return [{
     title: data?.collection
       ? `${data.collection?.name} - ${APP_META_TITLE}`
       : APP_META_TITLE,
-  };
+  }];
 };
 
 export default function CollectionSlug() {

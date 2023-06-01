@@ -7,6 +7,7 @@ import { classNames } from '~/utils/class-names';
 export default function QuantitySelector({
     lineId,
     max,
+    quantity,
     min = 1,
     disabled = false,
     adjustOrderLine,
@@ -14,13 +15,14 @@ export default function QuantitySelector({
   }: {
     lineId: string;
     max: number;
+    quantity: number;
     min?: number;
     disabled?: boolean;
     adjustOrderLine?: (lineId: string, quantity: number) => void;
     cssClasses?: string;
   }) {
   const inputId = useId();
-  const [value, { inc, dec, set, get }] = useCounter(min);
+  const [value, { inc, dec, set, get }] = useCounter(quantity);
 
   const handleOnIncrement = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     inc();
@@ -87,12 +89,12 @@ export default function QuantitySelector({
           <SfIconAdd />
         </SfButton>
       </div>
-      {disabled ? (
+      {disabled && (
         <p className="text-negative-700 font-medium text-xs mt-2">Out of stock</p>
-      ) : (
-        <p className="text-xs mt-2 text-neutral-500">
-          <strong className="text-neutral-900">{max}</strong> in stock
-        </p>
+      // ) : (
+      //   <p className="text-xs mt-2 text-neutral-500">
+      //     <strong className="text-neutral-900">{max}</strong> in stock
+      //   </p>
       )}
     </div>
   );

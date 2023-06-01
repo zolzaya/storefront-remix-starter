@@ -52,7 +52,7 @@ export function CartContents({
                     <label htmlFor={`quantity-${line.id}`} className="mr-2">
                       Тоо ширхэг
                     </label>
-                    <QuantitySelector lineId={line.id} cssClasses="mt-2" max={10} disabled={false} adjustOrderLine={adjustOrderLine} />
+                    <QuantitySelector lineId={line.id} cssClasses="mt-2" max={10} quantity={line.quantity || 1} disabled={false} adjustOrderLine={adjustOrderLine} />
                   </Form>
                 ) : (
                   <div className="text-gray-800">

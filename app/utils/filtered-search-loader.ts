@@ -1,6 +1,5 @@
-import { DataFunctionArgs } from '@remix-run/cloudflare';
 import { search, searchFacetValues } from '~/providers/products/products';
-import { sdk } from '~/graphqlWrapper';
+import { DataFunctionArgs } from '@remix-run/server-runtime';
 
 /**
  * This loader deals with loading product searches, which is used in both the search page and the

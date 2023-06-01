@@ -87,7 +87,8 @@ export async function loader({ request, params, context }: DataFunctionArgs) {
 export default function App() {
   const [open, setOpen] = useState(false);
   const loaderData = useLoaderData<RootLoaderData>();
-  const { collections } = loaderData;
+  const { collections, activeCustomer } = loaderData;
+  const isSignedIn = !!activeCustomer.activeCustomer?.id;
   const {
     activeOrderFetcher,
     activeOrder,
@@ -117,6 +118,7 @@ export default function App() {
           onCartIconClick={() => setOpen(!open)}
           cartQuantity={activeOrder?.totalQuantity ?? 0}
           collections={collections}
+          isSignedIn={isSignedIn}
         />
 
         <Outlet

@@ -1,55 +1,20 @@
 import { CheckIcon, PencilIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid';
 import { useActionData, useLoaderData, useNavigation } from '@remix-run/react';
-import { DataFunctionArgs, json, redirect } from '@remix-run/server-runtime';
-import { withZod } from '@remix-validated-form/with-zod';
-import { useEffect, useRef, useState } from 'react';
-import { ValidatedForm, validationError } from 'remix-validated-form';
-import { z } from 'zod';
 import { SfButton } from '@storefront-ui/react';
+import { useEffect, useRef, useState } from 'react';
+import { ValidatedForm } from 'remix-validated-form';
 import { ErrorMessage } from '~/components/ErrorMessage';
 import { HighlightedButton } from '~/components/HighlightedButton';
 import { Input } from '~/components/Input';
 import Modal from '~/components/modal/Modal';
-import {
-  requestUpdateCustomerEmailAddress,
-  updateCustomer,
-} from '~/providers/account/account';
-import { getActiveCustomerDetails } from '~/providers/customer/customer';
 import useToggleState from '~/utils/use-toggle-state';
 import { replaceEmptyString } from '~/utils/validation';
 
-enum FormIntent {
-  UpdateEmail = 'updateEmail',
-  UpdateDetails = 'updateDetails',
-}
-
-export const profileValidator = withZod(
-  z.object({
-    title: z.string(),
-    firstName: z.string().min(1, { message: 'Нэр хоосон байна' }),
-    lastName: z.string().min(1, { message: 'Овог хоосон байна' }),
-    phoneNumber: z.string().min(1, { message: 'Утасны дугаар хоосон байна' }),
-  }),
-);
-
-const changeEmailValidator = withZod(
-  z.object({
-    email: z
-      .string()
-      .min(1, { message: 'Имэйл хаяг хоосон байна' })
-      .email('Имэйл хаяг буруу байна'),
-    password: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
-  }),
-);
-
-export async function loader({ request }: DataFunctionArgs) {
-  const { activeCustomer } = await getActiveCustomerDetails({ request });
-  if (!activeCustomer) {
-    return redirect('/sign-in');
-  }
-  return json({ activeCustomer });
-}
+import { loader, action } from '~/route-containers/account/index.server';
+import { customerChangeEmailValidator, customerProfileValidator } from '~/validators';
+import { FormError, FormIntent } from '~/forms';
+export { loader, action };
 
 function isFormError(err: unknown): err is FormError {
   return (err as FormError).message !== undefined;
@@ -67,11 +32,6 @@ function isCustomerUpdatedResponse(
   return (response as CustomerUpdatedResponse).customerUpdated !== undefined;
 }
 
-type FormError = {
-  message: string;
-  intent?: string;
-};
-
 type EmailSavedResponse = {
   newEmailAddress: string;
 };
@@ -80,66 +40,6 @@ type CustomerUpdatedResponse = {
   customerUpdated: true;
 };
 
-export async function action({ request }: DataFunctionArgs) {
-  const body = await request.formData();
-  const intent = body.get('intent') as FormIntent | null;
-
-  const formError = (formError: FormError, init?: number | ResponseInit) => {
-    return json<FormError>(formError, init);
-  };
-
-  if (intent === FormIntent.UpdateEmail) {
-    const result = await changeEmailValidator.validate(body);
-
-    if (result.error) {
-      return validationError(result.error);
-    }
-
-    const { email, password } = result.data;
-
-    const updateResult = await requestUpdateCustomerEmailAddress(
-      password,
-      email,
-      { request },
-    );
-
-    if (updateResult.__typename !== 'Success') {
-      return formError(
-        { message: updateResult.message, intent: FormIntent.UpdateEmail },
-        {
-          status: 401,
-        },
-      );
-    }
-
-    return json<EmailSavedResponse>(
-      {
-        newEmailAddress: email,
-      },
-      { status: 200 },
-    );
-  }
-
-  if (intent === FormIntent.UpdateDetails) {
-    const result = await profileValidator.validate(body);
-
-    if (result.error) {
-      return validationError(result.error);
-    }
-
-    const { title, firstName, lastName, phoneNumber } = result.data;
-    await updateCustomer(
-      { title, firstName, lastName, phoneNumber },
-      { request },
-    );
-
-    return json({
-      customerUpdated: true,
-    });
-  }
-
-  return formError({ message: 'No valid form intent' }, { status: 401 });
-}
 
 export default function AccountDetails() {
   const { activeCustomer } = useLoaderData<typeof loader>();
@@ -195,7 +95,7 @@ export default function AccountDetails() {
         afterOpen={() => emailInputRef.current?.focus()}
         size="small"
       >
-        <ValidatedForm validator={changeEmailValidator} method="post">
+        <ValidatedForm validator={customerChangeEmailValidator} method="post">
           <Modal.Title>Имэйл хаягаа солих</Modal.Title>
           <Modal.Body>
             <div className="space-y-4 my-8">
@@ -290,7 +190,7 @@ export default function AccountDetails() {
         </div>
         <div className="border-t border-gray-200 pt-10">
           <ValidatedForm
-            validator={profileValidator}
+            validator={customerProfileValidator}
             formRef={formRef}
             method="post"
             id="details"

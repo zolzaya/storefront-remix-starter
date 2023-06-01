@@ -1,4 +1,3 @@
-import { FormEvent, useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import {
   Form,
@@ -6,50 +5,16 @@ import {
   useNavigate,
   useOutletContext,
 } from '@remix-run/react';
-import { OutletContext } from '~/types';
-import { DataFunctionArgs, redirect } from '@remix-run/server-runtime';
-import {
-  getAvailableCountries,
-  getEligibleShippingMethods,
-} from '~/providers/checkout/checkout';
-import { shippingFormDataIsValid } from '~/utils/validation';
-import { sessionStorage } from '~/servers/session.server';
-import { classNames } from '~/utils/class-names';
-import { getActiveCustomerAddresses } from '~/providers/customer/customer';
+import { FormEvent, useState } from 'react';
 import { AddressForm } from '~/components/account/AddressForm';
-import { ShippingMethodSelector } from '~/components/checkout/ShippingMethodSelector';
 import { ShippingAddressSelector } from '~/components/checkout/ShippingAddressSelector';
-import { getActiveOrder } from '~/providers/orders/order';
+import { ShippingMethodSelector } from '~/components/checkout/ShippingMethodSelector';
+import { OutletContext } from '~/types';
+import { classNames } from '~/utils/class-names';
+import { shippingFormDataIsValid } from '~/utils/validation';
 
-export async function loader({ request }: DataFunctionArgs) {
-  const session = await sessionStorage.getSession(
-    request?.headers.get('Cookie'),
-  );
-
-  const activeOrder = await getActiveOrder({ request });
-  
-  //check if there is an active order if not redirect to homepage
-  if (
-    !session ||
-    !activeOrder ||
-    !activeOrder.active ||
-    activeOrder.lines.length === 0
-  ) {
-    return redirect('/');
-  }
-  const { availableCountries } = await getAvailableCountries({ request });
-  const { eligibleShippingMethods } = await getEligibleShippingMethods({
-    request,
-  });
-  const { activeCustomer } = await getActiveCustomerAddresses({ request });
-  const error = session.get('activeOrderError');
-  return {
-    availableCountries,
-    eligibleShippingMethods,
-    activeCustomer,
-    error,
-  };
-}
+import { loader } from '~/route-containers/checkout/index.server';
+export { loader };
 
 export default function CheckoutShipping() {
   const { availableCountries, eligibleShippingMethods, activeCustomer, error } =

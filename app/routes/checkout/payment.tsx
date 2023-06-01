@@ -1,9 +1,10 @@
 import { useLoaderData, useOutletContext } from '@remix-run/react';
 import { ErrorCode, ErrorResult } from '~/generated/graphql';
 import { OutletContext } from '~/types';
+import { DirectDepositPayment } from '~/components/checkout/DirectDepositPayment';
+
 
 import { action, loader } from "~/route-containers/checkout/payment.server";
-import { DirectDepositPayment } from '~/components/checkout/DirectDepositPayment';
 export { action, loader };
 
 

@@ -39,7 +39,7 @@ export function DirectDepositPayment({
           name="paymentMethodCode"
           value={paymentMethod.code}
         />
-        <HighlightedButton>
+        <HighlightedButton type="submit">
           <CreditCardIcon className="w-5 h-5"></CreditCardIcon>
           <span>Дансаар төлөх</span>
         </HighlightedButton>

@@ -4,10 +4,10 @@ import { ValidatedForm } from 'remix-validated-form';
 import { ErrorResult } from '~/generated/graphql';
 import { Input } from '~/components/Input';
 
-import { action } from "~/route-containers/authentication/login.server";
-import { loginValidator } from '~/validators';
-export { action };
+import { action, loader } from "~/route-containers/authentication/login.server";
+export { action, loader };
 
+import { loginValidator } from '~/validators';
 
 export default function SignInPage() {
   const [searchParams] = useSearchParams();
