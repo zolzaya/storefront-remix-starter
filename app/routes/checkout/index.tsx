@@ -1,6 +1,5 @@
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import {
-  Form,
   useLoaderData,
   useNavigate,
   useOutletContext,
@@ -12,9 +11,14 @@ import { ShippingMethodSelector } from '~/components/checkout/ShippingMethodSele
 import { OutletContext } from '~/types';
 import { classNames } from '~/utils/class-names';
 import { shippingFormDataIsValid } from '~/utils/validation';
+import { SbInput } from '~/components/form/SbInput';
+import { ValidatedForm } from 'remix-validated-form';
+import { checkoutAddressValidator, checkoutCustomerDataValidator } from '~/validators';
+
 
 import { loader } from '~/route-containers/checkout/index.server';
 export { loader };
+
 
 export default function CheckoutShipping() {
   const { availableCountries, eligibleShippingMethods, activeCustomer, error } =
@@ -38,29 +42,25 @@ export default function CheckoutShipping() {
     activeOrder?.shippingLines?.length &&
     activeOrder?.lines?.length;
 
-  const submitCustomerForm = (event: FormEvent<HTMLFormElement>) => {
+  const submitCustomerForm = async (event: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
-    const { emailAddress, firstName, lastName } = Object.fromEntries<any>(
-      formData.entries(),
-    );
-    const isValid = event.currentTarget.checkValidity();
-    if (
-      customerFormChanged &&
-      isValid &&
-      emailAddress &&
-      firstName &&
-      lastName
-    ) {
+    const isValid = (await checkoutCustomerDataValidator.validateField(formData, 'emailAddress')).error === undefined
+                    && (await checkoutCustomerDataValidator.validateField(formData, 'firstName')).error === undefined
+                    && (await checkoutCustomerDataValidator.validateField(formData, 'lastName')).error === undefined;
+    if (customerFormChanged && isValid) {
       activeOrderFetcher.submit(formData, {
-        method: 'post',
+        method: 'POST',
         action: '/api/active-order',
       });
       setCustomerFormChanged(false);
     }
   };
-  const submitAddressForm = (event: FormEvent<HTMLFormElement>) => {
+  const submitAddressForm = async (event: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
-    const isValid = event.currentTarget.checkValidity();
+    const isValid = (await checkoutAddressValidator.validateField(formData, 'fullName')).error === undefined
+                    && (await checkoutAddressValidator.validateField(formData, 'streetLine')).error === undefined
+                    && (await checkoutAddressValidator.validateField(formData, 'countryCode')).error === undefined
+                    && (await checkoutAddressValidator.validateField(formData, 'phoneNumber')).error === undefined;
     if (addressFormChanged && isValid) {
       setShippingAddress(formData);
     }
@@ -82,7 +82,7 @@ export default function CheckoutShipping() {
   function setShippingAddress(formData: FormData) {
     if (shippingFormDataIsValid(formData)) {
       activeOrderFetcher.submit(formData, {
-        method: 'post',
+        method: 'POST',
         action: '/api/active-order',
       });
       setAddressFormChanged(false);
@@ -123,83 +123,56 @@ export default function CheckoutShipping() {
             <p>{customer?.emailAddress}</p>
           </div>
         ) : (
-          <Form
-            method="post"
+          <ValidatedForm
+            method="POST"
             action="/api/active-order"
+            validator={checkoutCustomerDataValidator}
+            // fetcher={activeOrderFetcher}
             onBlur={submitCustomerForm}
             onChange={() => setCustomerFormChanged(true)}
-            hidden={isSignedIn}
+            // hidden={isSignedIn}
           >
             <input type="hidden" name="action" value="setOrderCustomer" />
             <div className="mt-4">
-              <label
-                htmlFor="emailAddress"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Имэйл
-              </label>
-              <div className="mt-1">
-                <input
-                  type="email"
-                  id="emailAddress"
-                  name="emailAddress"
-                  autoComplete="email"
-                  defaultValue={customer?.emailAddress}
-                  className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                />
-              </div>
-              {error?.errorCode === 'EMAIL_ADDRESS_CONFLICT_ERROR' && (
-                <p className="mt-2 text-sm text-red-600" id="email-error">
-                  {error.message}
-                </p>
-              )}
+              <SbInput
+                name="emailAddress"
+                autoComplete="emailAddress"
+                label="Имэйл"
+                type="text"
+                required
+                defaultValue={customer?.emailAddress}
+              />
             </div>
             <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
               <div>
-                <label
-                  htmlFor="firstName"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Нэр
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    autoComplete="given-name"
-                    defaultValue={customer?.firstName}
-                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                  />
-                </div>
+                <SbInput
+                  name="firstName"
+                  label="Нэр"
+                  defaultValue={customer?.firstName}
+                  required
+                  id="firstName"
+                />
               </div>
 
               <div>
-                <label
-                  htmlFor="lastName"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Овог
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    autoComplete="family-name"
-                    defaultValue={customer?.lastName}
-                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                  />
-                </div>
+                <SbInput
+                  name="lastName"
+                  label="Овог"
+                  defaultValue={customer?.lastName}
+                  required
+                  id="lastName"
+                />
               </div>
             </div>
-          </Form>
+          </ValidatedForm>
         )}
       </div>
 
-      <Form
-        method="post"
+      <ValidatedForm
+        method="POST"
         action="/api/active-order"
+        // fetcher={activeOrderFetcher}
+        validator={checkoutAddressValidator}
         onBlur={submitAddressForm}
         onChange={() => setAddressFormChanged(true)}
       >
@@ -224,7 +197,7 @@ export default function CheckoutShipping() {
             defaultFullName={defaultFullName}
           />
         )}
-      </Form>
+      </ValidatedForm>
 
       <div className="mt-10 border-t border-gray-200 pt-10">
         <ShippingMethodSelector

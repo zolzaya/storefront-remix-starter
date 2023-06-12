@@ -4,8 +4,7 @@ import { RefObject } from 'react';
 import { ValidatedForm } from 'remix-validated-form';
 import { Address, AvailableCountriesQuery } from '~/generated/graphql';
 import { Input } from '~/components/Input';
-import { Select } from '~/components/Select';
-import { SfSelect } from '@storefront-ui/react';
+import { SbSelect } from '~/components/form/SbSelect';
 
 export const validator = withZod(
   z.object({
@@ -67,7 +66,7 @@ export default function CustomerAddressForm({
           required
           autoComplete="address-line1"
         />
-        <Select
+        <SbSelect
           name="countryCode"
           autoComplete="country"
           placeholder="-- Сонгох --"
@@ -80,7 +79,7 @@ export default function CustomerAddressForm({
               {country.name}
             </option>
           ))}
-        </Select>
+        </SbSelect>
         <input type="submit" hidden />
       </div>
     </ValidatedForm>

@@ -2,7 +2,7 @@ import { ArrowPathIcon } from '@heroicons/react/24/solid';
 import { useLoaderData, useNavigation, useSubmit } from '@remix-run/react';
 import { ValidatedForm } from 'remix-validated-form';
 import { Button } from '~/components/Button';
-import { Select } from '~/components/Select';
+import { SbSelect } from '~/components/form/SbSelect';
 import OrderHistoryItem from '~/components/account/OrderHistoryItem';
 import { ALLOWED_PAGINATION_LIMITS } from '~/constants';
 
@@ -62,7 +62,7 @@ export default function AccountHistory() {
             {navigation.state !== 'idle' && (
               <ArrowPathIcon className="animate-spin h-6 w-6 text-gray-500" />
             )}
-            <Select
+            <SbSelect
               name="limit"
               required
               defaultValue={appliedPaginationLimit}
@@ -72,7 +72,7 @@ export default function AccountHistory() {
                   {x}
                 </option>
               ))}
-            </Select>
+            </SbSelect>
           </span>
 
           <div className="flex" role="group">

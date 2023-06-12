@@ -20,6 +20,10 @@ import { ErrorCode, ErrorResult } from '~/generated/graphql';
 
 
 import { loader } from "~/route-containers/product.server";
+import { SbSelect } from '~/components/form/SbSelect';
+import { ValidatedForm } from 'remix-validated-form';
+import { checkoutProductValidator } from '~/validators';
+import ProductGallery from '~/components/products/ProductGallery';
 export { loader };
 
 
@@ -91,14 +95,16 @@ export default function ProductSlug() {
         </h2>
         <Breadcrumbs
           items={
-            product.collections[product.collections.length - 1]?.breadcrumbs ??
-            []
+            product.collections[product.collections.length - 1]?.breadcrumbs ?? []
           }
         ></Breadcrumbs>
-        <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start mt-4 md:mt-12">
-          {/* Image gallery */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start mt-4 md:mt-12 mb-16">
           <div className="w-full max-w-2xl mx-auto sm:block lg:max-w-none">
-            <span className="rounded-md overflow-hidden">
+
+            {/* Image gallery */}
+            <ProductGallery assets={product.assets} />
+
+            {/* <span className="rounded-md overflow-hidden">
               <div className="w-full h-full object-center object-cover rounded-lg">
                 <img
                   src={
@@ -109,12 +115,13 @@ export default function ProductSlug() {
                   className="w-full h-full object-center object-cover rounded-lg"
                 />
               </div>
-            </span>
+            </span> */}
 
-            {product.assets.length > 1 && (
+            {/* {product.assets.length > 1 && (
               <ScrollableContainer>
                 {product.assets.map((asset) => (
                   <div
+                    key={asset.id}
                     className={`basis-1/3 md:basis-1/4 flex-shrink-0 select-none touch-pan-x rounded-lg ${
                       featuredAsset?.id == asset.id
                         ? 'outline outline-2 outline-primary outline-offset-[-2px]'
@@ -129,13 +136,13 @@ export default function ProductSlug() {
                       className="rounded-lg select-none h-24 w-full object-cover"
                       src={
                         asset.preview +
-                        '?preset=full' /* not ideal, but technically prevents loading 2 seperate images */
+                        '?preset=full'
                       }
-                    />
+                    /</div>>
                   </div>
                 ))}
               </ScrollableContainer>
-            )}
+            )} */}
           </div>
 
           {/* Product info */}
@@ -150,24 +157,17 @@ export default function ProductSlug() {
                 }}
               />
             </div>
-            <activeOrderFetcher.Form method="post" action="/api/active-order">
+            <ValidatedForm noValidate={true} validator={checkoutProductValidator} fetcher={activeOrderFetcher} method="POST" action="/api/active-order">
               <input type="hidden" name="action" value="addItemToOrder" />
               {1 < product.variants.length ? (
                 <div className="mt-4">
-                  <label
-                    htmlFor="option"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Сонгох
-                  </label>
-                  <select
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
+                  <SbSelect
                     id="productVariant"
                     value={selectedVariantId}
                     name="variantId"
+                    placeholder=''
                     onChange={(e) => {
                       setSelectedVariantId(e.target.value);
-
                       const variant = findVariantById(e.target.value);
                       if (variant) {
                         setFeaturedAsset(variant!.featuredAsset);
@@ -179,7 +179,7 @@ export default function ProductSlug() {
                         {variant.name}
                       </option>
                     ))}
-                  </select>
+                  </SbSelect>
                 </div>
               ) : (
                 <input
@@ -221,12 +221,12 @@ export default function ProductSlug() {
                     )}
                   </button>
 
-                  <SfButton type="button" className="ml-4 py-3 px-3" variant="tertiary" square aria-label="Add to favorites">
+                  {/* <SfButton type="button" className="ml-4 py-3 px-3" variant="tertiary" square aria-label="Add to favorites">
                     <HeartIcon
                       className="h-6 w-6 flex-shrink-0"
                       aria-hidden="true"
                     />
-                  </SfButton>
+                  </SfButton> */}
 
                   {/* <button
                     type="button"
@@ -250,7 +250,7 @@ export default function ProductSlug() {
                 </div>
               )}
 
-              <section className="mt-12 pt-12 border-t text-xs">
+              <section className="mt-6 pt-6 border-t text-xs">
                 <h3 className="text-gray-600 font-bold mb-2">
                   Shipping & Returns
                 </h3>
@@ -270,7 +270,7 @@ export default function ProductSlug() {
                   </p>
                 </div>
               </section>
-            </activeOrderFetcher.Form>
+            </ValidatedForm>
           </div>
         </div>
       </div>

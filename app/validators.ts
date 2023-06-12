@@ -50,6 +50,35 @@ export const customerProfileValidator = withZod(
 );
 
 
+export const checkoutCustomerDataValidator = withZod(
+  z.object({
+    emailAddress: z.string()
+      .min(1, { message: 'Имэйл хаяг хоосон байна' })
+      .email('Имэйл хаяг буруу байна'),
+    firstName: z.string().min(1, { message: 'Нэр хоосон байна' }),
+    lastName: z.string().min(1, { message: 'Овог хоосон байна' }),
+  })
+);
+
+
+export const checkoutAddressValidator = withZod(
+  z.object({
+    fullName: z.string().min(1, { message: 'Нэр хоосон байна' }),
+    company: z.string(),
+    countryCode: z.string(),
+    streetLine1: z.string().min(1, { message: 'Хаяг хоосон байна' }),
+    phoneNumber: z.string().min(1, { message: 'Утасны дугаар хоосон байна' }),
+  })
+);
+
+
+export const checkoutProductValidator = withZod(
+  z.object({
+    variantId: z.string().min(1, { message: "Product variant is not set"})
+  })
+);
+
+
 export const customerChangeEmailValidator = withZod(
   z.object({
     email: z

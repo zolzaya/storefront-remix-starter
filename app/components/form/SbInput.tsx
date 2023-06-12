@@ -1,6 +1,7 @@
 import { SfInput } from '@storefront-ui/react';
 import React from 'react';
 import { useField } from 'remix-validated-form';
+import FormElement from '../FormElement';
 
 type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -18,31 +19,14 @@ export const SbInput = React.forwardRef<HTMLInputElement, InputProps>(
     const { error, getInputProps } = useField(name);
 
     return (
-    <>
-      <label htmlFor={name}>
-        <span className="text-sm font-medium">
-          {label}
-        </span>
-          {required && <span className="text-rose-500">*</span>}
+      <FormElement name={name} label={label} helper={helper} required={required}>
         <SfInput 
-          invalid={error === undefined}
+          invalid={error !== undefined}
           ref={ref}
-          wrapperClassName={wrapperClassName}
+          // wrapperClassName={wrapperClassName}
           {...getInputProps()}
          />
-      </label>
-      <div className="flex justify-between">
-        <div>
-          {error && (
-            <p className="text-sm text-negative-700 font-medium mt-0.5">{error}</p>
-          )}
-
-          {helper && (
-            <p className="text-xs text-neutral-500 mt-0.5">Help Text</p>
-          )}
-        </div>
-      </div>
-    </>
+      </FormElement>
    );
   },
 );
