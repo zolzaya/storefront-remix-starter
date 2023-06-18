@@ -61,6 +61,27 @@ export const checkoutCustomerDataValidator = withZod(
 );
 
 
+export const signUpValidator = withZod(
+  z.object({
+      email: z
+        .string()
+        .min(1, { message: 'Имэйл хаяг хоосон байна' })
+        .email('Имэйл хаяг буруу байна'),
+      firstName: z.string().min(1, { message: 'Нэр хоосон байна' }),
+      lastName: z.string().min(1, { message: 'Овог хоосон байна' }),
+      password: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
+      repeatPassword: z.string().min(1, { message: 'Нууц үг хоосон байна' }),
+    })
+    .refine(
+      ({ password, repeatPassword }) => password === repeatPassword,
+      {
+        path: ['repeatPassword'],
+        message: 'Нууц үг тохирохгүй байна',
+      },
+    ),
+);
+
+
 export const checkoutAddressValidator = withZod(
   z.object({
     fullName: z.string().min(1, { message: 'Нэр хоосон байна' }),

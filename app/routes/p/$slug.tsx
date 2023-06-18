@@ -24,6 +24,7 @@ import { SbSelect } from '~/components/form/SbSelect';
 import { ValidatedForm } from 'remix-validated-form';
 import { checkoutProductValidator } from '~/validators';
 import ProductGallery from '~/components/products/ProductGallery';
+import Accordions from '~/components/products/Accordions';
 export { loader };
 
 
@@ -249,27 +250,6 @@ export default function ProductSlug() {
                   <Alert message={addItemToOrderError} />
                 </div>
               )}
-
-              <section className="mt-6 pt-6 border-t text-xs">
-                <h3 className="text-gray-600 font-bold mb-2">
-                  Shipping & Returns
-                </h3>
-                <div className="text-gray-500 space-y-1">
-                  <p>
-                    Standard shipping: 3 - 5 working days. Express shipping: 1 -
-                    3 working days.
-                  </p>
-                  <p>
-                    Shipping costs depend on delivery address and will be
-                    calculated during checkout.
-                  </p>
-                  <p>
-                    Returns are subject to terms. Please see the{' '}
-                    <span className="underline">returns page</span> for further
-                    information.
-                  </p>
-                </div>
-              </section>
             </ValidatedForm>
           </div>
         </div>

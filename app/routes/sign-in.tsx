@@ -8,6 +8,7 @@ import { action, loader } from "~/route-containers/authentication/login.server";
 export { action, loader };
 
 import { loginValidator } from '~/validators';
+import { SfButton } from '@storefront-ui/react';
 
 export default function SignInPage() {
   const [searchParams] = useSearchParams();
@@ -106,15 +107,12 @@ export default function SignInPage() {
               )}
 
               <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
+                <SfButton type="submit" className="w-full">
                   <span className='flex gap-4 items-center'>
                     {fetcher.state !== 'idle' && <ArrowPathIcon className="animate-spin h-5 w-5 text-gray-500" />}
-                    Нэвтрэх
                   </span>
-                </button>
+                  Нэвтрэх
+                </SfButton>
               </div>
             </fieldset>
           </ValidatedForm>
